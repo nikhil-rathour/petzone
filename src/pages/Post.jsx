@@ -73,6 +73,9 @@ function Post() {
                 <p className="text-lg text-gray-700 mb-4">
                   Seller Name: <span className="font-semibold">{post.sellerName}</span>
                 </p>
+                <p className="text-lg text-gray-700 mb-4">
+                  Posted on: <span className="font-semibold">{new Date(post.postDate).toLocaleDateString()}</span>
+                </p>
                 {post.adopt && (
                   <p className="text-lg font-semibold text-green-600 mb-4">
                     Available for Adoption
