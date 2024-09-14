@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { RTE } from '../components/RTE'  // Add this import
+import RTE from '../components/RTE' // Add this import
 
 const stories = [
   {
@@ -38,7 +38,7 @@ function Story() {
       {/* Add the RTE component */}
       <div className="mt-8">
         <h2 className="text-2xl font-semibold mb-4 text-indigo-600">Add Your Pet Story</h2>
-        <RTE name="petStory" label="Your Pet's Story" />
+        {/* <RTE name="petStory" label="Your Pet's Story" /> */}
       </div>
     </div>
   )
