@@ -59,6 +59,24 @@ const Help = () => {
       photo: 'https://thegodsgiftfoundation.com/wp-content/uploads/2022/01/IMG-20201218-WA0008.jpg',
       mapLink: 'https://maps.app.goo.gl/2P7euCcPBewgT8dW8',
     },
+    {
+      id: 7,
+      name: 'Janki Jivdaya Charitable Trust',
+      location: 'Surat',
+      contact: '9726009709',
+      description: 'Charitable trust.',
+      photo: 'https://lh5.googleusercontent.com/p/AF1QipP1GfPQKwY4txBAlUFz2I6Z4MHgmWGNJlIPg-3w=w1080-k-no',
+      mapLink: 'https://maps.app.goo.gl/337rATA8i4C7Jo37A',
+    },
+    {
+      id: 8,
+      name: 'Vrindavan Gaushala',
+      location: 'Surat',
+      contact: '6368568352',
+      description: 'Animal Welfare organization.',
+      photo: 'https://imgs.search.brave.com/GCsB4AflLTwps7FvwX4c2NgkKvWb8RgzrsmtNh3Ueek/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvODI0/MzU0NjM2L3Bob3Rv/L2luLXRoaXMtcGhv/dG9ncmFwaC10YWtl/bi1vbi1qdWx5LTE5/LTIwMTctaW5kaWFu/LWVtcGxveWVlcy1n/aXZlLW1lZGljYWwt/Y2FyZS10by1zaWNr/LWNvd3MtYXQtYW4u/anBnP3M9NjEyeDYx/MiZ3PTAmaz0yMCZj/PWNwNzdPZUtoaFRf/TjNEWWx3eTh0SUpP/OWxuVFZsa2Jvc041/d19KemhnTXc9',
+      mapLink: 'https://maps.app.goo.gl/337rATA8i4C7Jo37A?g_st=ac',
+    },
   ];
 
   // Filter NGOs based on selected location
@@ -100,6 +118,7 @@ const Help = () => {
               <option value="Ahmedabad">Ahmedabad</option>
               <option value="Rajkot">Rajkot</option>
               <option value="Gandhinagar">Gandhinagar</option>
+              <option value="Surat">Surat</option>
             </select>
           </div>
         </div>
