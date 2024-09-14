@@ -67,14 +67,32 @@ const Help = () => {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#C499F3] via-[#F2AFEF] to-[#7360DF] p-6">
-      <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl p-8">
-        <div className="flex flex-col md:flex-row justify-between items-center mb-8">
-          <h1 className="text-4xl font-extrabold text-[#e63579]">Help NGOs 🐾</h1>
-          <div className="flex space-x-4 mt-4 md:mt-0">
-            {/* Location Selector */}
+    <div className="min-h-screen bg-gradient-to-br from-[#AD49E1] to-[#EBD3F8]">
+      {/* Header */}
+      <div className="relative w-full overflow-hidden h-80 md:h-96 lg:h-[28rem]">
+        <img
+          src="https://images.pexels.com/photos/1350591/pexels-photo-1350591.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+          alt="Help NGOs Banner"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white text-center px-4">
+          Support When You Need It, for Pets You Love
+          </h1>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="container mx-auto px-6 py-12">
+        <h2 className="text-3xl font-bold mb-8 text-white text-center">
+          Find NGOs Near You
+        </h2>
+        
+        {/* Filters */}
+        <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
+          <div className="flex justify-center">
             <select
-              className="bg-[#7360DF] text-white border border-[#7360DF] p-2 rounded-lg shadow-sm focus:ring-2 focus:ring-[#7360DF]"
+              className="w-full md:w-1/2 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#7360DF]"
               value={selectedLocation}
               onChange={(e) => setSelectedLocation(e.target.value)}
             >
@@ -86,30 +104,49 @@ const Help = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {filteredNGOs.length > 0 ? (
-            filteredNGOs.map((ngo) => (
+        {/* NGO Cards */}
+        {filteredNGOs.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredNGOs.map((ngo) => (
               <div
                 key={ngo.id}
-                className="bg-gradient-to-b from-purple-50 to-pink-50 p-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300"
+                className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1"
               >
                 <img
                   src={ngo.photo}
                   alt={ngo.name}
-                  className="w-full h-48 object-cover rounded-xl mb-4 shadow-md"
+                  className="w-full h-64 object-cover"
                 />
-                <h3 className="text-2xl font-bold text-[#e63579] mb-2">{ngo.name} 🐕</h3>
-                <p className="text-gray-700 mb-4">{ngo.description}</p>
-                <p className="text-sm text-gray-600 mb-2">
-                  Location: <a href={ngo.mapLink} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">{ngo.location}</a>
-                </p>
-                <p className="text-sm text-gray-600">Contact: {ngo.contact}</p>
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold mb-4">{ngo.name}</h3>
+                  <p className="text-gray-600 mb-4">{ngo.description}</p>
+                  <p className="text-gray-600 mb-2">
+                    <span className="font-medium">Location:</span>{' '}
+                    <a href={ngo.mapLink} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
+                      {ngo.location}
+                    </a>
+                  </p>
+                  <p className="text-gray-600 mb-4">
+                    <span className="font-medium">Contact:</span> {ngo.contact}
+                  </p>
+                  <a
+                    href={ngo.mapLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block w-full bg-[#7360DF] text-white text-center py-2 px-4 rounded-md hover:bg-opacity-90 transition-colors duration-300"
+                  >
+                    View on Map
+                  </a>
+                </div>
               </div>
-            ))
-          ) : (
-            <p className="text-gray-700 col-span-2 text-center text-lg">No NGOs available for the selected location.</p>
-          )}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-20 bg-white rounded-lg shadow-lg">
+            <h2 className="text-2xl font-semibold text-gray-800">No NGOs available</h2>
+            <p className="text-gray-600 mt-4">Try selecting a different location.</p>
+          </div>
+        )}
       </div>
     </div>
   );
