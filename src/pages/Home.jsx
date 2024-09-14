@@ -66,7 +66,7 @@ const Home = () => {
 
   const getBreeds = (Type) => {
     if (Type === 'Dog' ) {
-      return ['All', 'Labrador', 'Bulldog', 'Beagle', 'Poodle'];
+      return ['All', 'Labrador', 'Pug', 'Beagle', 'German Shepherd', 'shih tzu', 'rottweiler',];
     } else if (Type === 'Cat') {
       return ['All', 'Persian', 'Siamese', 'Bengal', 'Maine Coon'];
     }
