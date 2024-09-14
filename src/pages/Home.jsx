@@ -92,7 +92,7 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#C499F3] via-[#F2AFEF] to-[#7360DF]">
+    <div className="min-h-screen bg-gradient-to-br from-[#AD49E1] to-[#EBD3F8]">
       {/* Carousel */}
       <div className="relative w-full overflow-hidden">
         <div
