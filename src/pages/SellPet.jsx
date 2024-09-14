@@ -16,8 +16,8 @@ function SellPet() {
   console.log(userData.$id)
 
   const petOptions = {
-    Dog: ['Labrador', 'Bulldog', 'Beagle', 'Poodle'],
-    Cat: ['Persian', 'Siamese', 'Bengal', 'Maine Coon'],
+    Dog: ['Labrador', 'Pug', 'Beagle', 'German Shepherd', 'shih tzu', 'rottweiler'],
+    Cat: ['Persian', 'Siamese', 'Indian Billi (Indigenous Cat)', 'Himalayan', 'Bengal', 'British Shorthair'],
   };
   const [type, setType] = useState(post?.Type || "Dog");
   const [breeds, setBreeds] = useState(petOptions[type]);

@@ -68,7 +68,7 @@ const Home = () => {
     if (Type === 'Dog' ) {
       return ['All', 'Labrador', 'Pug', 'Beagle', 'German Shepherd', 'shih tzu', 'rottweiler',];
     } else if (Type === 'Cat') {
-      return ['All', 'Persian', 'Siamese', 'Bengal', 'Maine Coon'];
+      return ['All', 'Persian', 'Siamese', 'Indian Billi (Indigenous Cat)', 'Himalayan', 'Bengal', 'British Shorthair'];
     }
     return [];
   };
