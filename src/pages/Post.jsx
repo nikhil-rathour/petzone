@@ -51,22 +51,33 @@ function Post() {
                   {post.breed}
                 </h2>
                 <p className="text-lg text-gray-700 mb-2">
-                  Gender: <span className="font-semibold">{post.Gender}</span>
+                  Type: <span className="font-semibold">{post.type}</span>
                 </p>
                 <p className="text-lg text-gray-700 mb-2">
-                  Age in weeks: <span className="font-semibold">{post.age}</span>
+                  Gender: <span className="font-semibold">{post.gender}</span>
+                </p>
+                <p className="text-lg text-gray-700 mb-2">
+                  Age: <span className="font-semibold">{post.age} weeks</span>
                 </p>
                 {!post.adopt && (
                   <p className="text-lg text-gray-700 mb-2">
-                    Price: <span className="font-semibold">{post.Price}</span>
+                    Price: <span className="font-semibold">₹{post.Price}</span>
                   </p>
                 )}
                 <p className="text-lg text-gray-700 mb-2">
-                  Contact Number: <span className="font-semibold">{post.phone}</span>
+                  Contact Number: <span className="font-semibold">{post.sellerNumber}</span>
                 </p>
                 <p className="text-lg text-gray-700 mb-4">
                   Location: <span className="font-semibold">{post.location}</span>
                 </p>
+                <p className="text-lg text-gray-700 mb-4">
+                  Seller Name: <span className="font-semibold">{post.sellerName}</span>
+                </p>
+                {post.adopt && (
+                  <p className="text-lg font-semibold text-green-600 mb-4">
+                    Available for Adoption
+                  </p>
+                )}
               </div>
 
               {isAuthor && (
@@ -87,16 +98,16 @@ function Post() {
             </div>
           </div>
           
-          {post.VaccinationImg && (
+          {post.medicalImage && (
             <div className="p-6 border-t border-gray-200">
               <h3 className="text-2xl font-semibold text-[#7360DF] mb-4">
-                Vaccination Details
+                Medical Details
               </h3>
               <div className="relative overflow-hidden rounded-2xl shadow-lg">
                 <div className="flex justify-center p-3">
                   <img
-                    src={appwriteService.getFilePreview(post.VaccinationImg)}
-                    alt="Vaccination Document"
+                    src={appwriteService.getFilePreview(post.medicalImage)}
+                    alt="Medical Document"
                     className="w-1/2 object-cover object-center transform hover:scale-105 transition-transform duration-500"
                   />
                 </div>
