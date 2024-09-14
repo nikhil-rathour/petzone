@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ID } from "appwrite";
+import Input from "../Components/Input";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -12,13 +13,13 @@ function SellPet() {
 
   const navigate = useNavigate();
   const userData = useSelector((state) => state.auth.userData);
-  console.log(userData)
+  console.log(userData.$id)
 
   const petOptions = {
-    Dog: ['Labrador', 'Pug', 'Beagle', 'German Shepherd', 'shih tzu', 'rottweiler'],
+    Dog: ['Labrador', 'Pug', 'Beagle', 'German Shepherd', 'Shih Tzu', 'Rottweiler'],
     Cat: ['Persian', 'Siamese', 'Indian Billi (Indigenous Cat)', 'Himalayan', 'Bengal', 'British Shorthair'],
   };
-  const [type, setType] = useState(post?.Type || "Dog");
+  const [type, setType] = useState(post?.type || "Dog");
   const [breeds, setBreeds] = useState(petOptions[type]);
   const locationOptions = ["Ahmedabad", "Gandhinagar", "Rajkot", "Surat", "Vadodara"];
 
@@ -36,15 +37,15 @@ function SellPet() {
   }, [slug, navigate]);
 
   const setDefaultValues = (postData) => {
-    setValue("type", postData.Type);
+    setValue("type", postData.type);
     setValue("breed", postData.breed);
-    setValue("gender", postData.Gender);
+    setValue("gender", postData.gender);
     setValue("age", postData.age);
-    setValue("sellerNumber", postData.phone);
+    setValue("sellerNumber", postData.sellerNumber);
     setValue("location", postData.location);
     setValue("Price", postData.Price);
     setValue("adopt", postData.adopt);
-    setType(postData.Type);
+    setType(postData.type);
     setIsAdopt(postData.adopt);
   };
 
@@ -72,46 +73,45 @@ function SellPet() {
     console.log("Form data:", data);
     try {
       // File upload logic
-      let petImageFile = null;
-      let medicalImageFile = null;
+      let file1 = null;
+      let file2 = null;
 
-      if (data.petImage && data.petImage[0]) {
+      if (data.image1 && data.image1[0]) {
         try {
-          petImageFile = await service.uploadFile(data.petImage[0]);
-          console.log("Pet image uploaded successfully:", petImageFile);
+          file1 = await service.uploadFile(data.image1[0]);
+          console.log("Pet image uploaded successfully:", file1);
         } catch (error) {
           console.error("Error uploading pet image:", error);
           throw new Error("Failed to upload pet image");
         }
       }
 
-      if (data.medicalImage && data.medicalImage[0]) {
+      if (data.image2 && data.image2[0]) {
         try {
-          medicalImageFile = await service.uploadFile(data.medicalImage[0]);
-          console.log("Medical image uploaded successfully:", medicalImageFile);
+          file2 = await service.uploadFile(data.image2[0]);
+          console.log("Vaccination image uploaded successfully:", file2);
         } catch (error) {
-          console.error("Error uploading medical image:", error);
-          throw new Error("Failed to upload medical image");
+          console.error("Error uploading vaccination image:", error);
+          throw new Error("Failed to upload vaccination image");
         }
       }
 
-      console.log("Uploaded files:", { petImageFile, medicalImageFile });
+      console.log("Uploaded files:", { file1, file2 });
 
       const postData = {
         type: data.type,
         breed: data.breed,
-        petImage: petImageFile ? petImageFile.$id : post?.petImage,
-        medicalImage: medicalImageFile ? medicalImageFile.$id : post?.medicalImage,
-        sellerName: userData.name,
-        location: data.location,
-        age: data.age,
-        sellerNumber: data.sellerNumber,
-        adopt: data.adopt === "true",
-        status: "active",
-        userId: userData.$id,
-        Price: data.adopt === "true" ? "0" : data.Price,
         gender: data.gender,
-        postDate: new Date().toISOString(),
+        age: data.age,
+        petImage: file1 ? file1.$id : post?.petImage,
+        medicalImage: file2 ? file2.$id : post?.medicalImage,
+        sellerNumber: data.sellerNumber,
+        location: data.location,
+        Price: data.adopt ? "0" : data.Price,
+        status: "active",
+        adopt: data.adopt,
+        userId: userData.$id,
+        sellerName: userData.name,
       };
 
       console.log("Post data:", postData);
@@ -119,12 +119,12 @@ function SellPet() {
       let dbPost;
       if (post) {
         // Update existing post
-        if (petImageFile && post.petImage) {
+        if (file1 && post.petImage) {
           console.log("Deleting old pet image");
           await service.deleteFile(post.petImage);
         }
-        if (medicalImageFile && post.medicalImage) {
-          console.log("Deleting old medical image");
+        if (file2 && post.medicalImage) {
+          console.log("Deleting old vaccination image");
           await service.deleteFile(post.medicalImage);
         }
 
@@ -136,6 +136,7 @@ function SellPet() {
         dbPost = await service.createPost({
           ...postData,
           slug: ID.unique(),
+          postDate: new Date().toISOString(),
         });
       }
 
@@ -155,258 +156,208 @@ function SellPet() {
     }
   };
 
-  const carouselImages = [
-    'https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    'https://images.pexels.com/photos/1254140/pexels-photo-1254140.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    'https://images.pexels.com/photos/406014/pexels-photo-406014.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-  ];
-
-  const [currentSlide, setCurrentSlide] = useState(0);
-
-  useEffect(() => {
-    const slideInterval = setInterval(() => {
-      setCurrentSlide((prevSlide) => (prevSlide + 1) % carouselImages.length);
-    }, 5000);
-
-    return () => clearInterval(slideInterval);
-  }, [carouselImages.length]);
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#AD49E1] to-[#EBD3F8]">
-      {/* Carousel */}
-      <div className="relative w-full overflow-hidden h-80 md:h-96 lg:h-[28rem]">
-        <div
-          className="flex transition-transform duration-1000 ease-in-out h-full"
-          style={{ transform: `translateX(-${currentSlide * 100}%)` }}
-        >
-          {carouselImages.map((image, index) => (
-            <div key={index} className="w-full flex-shrink-0 relative">
-              <img src={image} alt={`Slide ${index}`} className="w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white text-center px-4">
-                  {index === 0 && "List Your Pet with Love"}
-                  {index === 1 && "Find a New Home for Your Pet"}
-                  {index === 2 && "Connect with Caring Pet Owners"}
-                </h1>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Form Section */}
-      <div className="container mx-auto px-6 py-12">
-        <div className="max-w-4xl mx-auto bg-white shadow-xl rounded-lg p-8">
-          <h2 className="text-3xl font-bold text-center text-[#7360DF] mb-8">
-            {post ? "Update Your Pet Listing" : "List Your Pet"}
-          </h2>
-          <form onSubmit={handleSubmit(submit)} className="space-y-6">
-            {/* Pet Type and Breed */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="flex flex-col">
-                <label className="text-lg font-semibold text-gray-700 mb-2">Pet Type</label>
-                <select
-                  {...register("type", { required: true })}
-                  onChange={(e) => {
-                    setType(e.target.value);
-                    setValue("type", e.target.value);
-                    setValue("breed", "");
-                  }}
-                  className="border border-[#C499F3] rounded-lg shadow-sm focus:ring-2 focus:ring-[#7360DF] w-full px-4 py-2"
-                >
-                  {Object.keys(petOptions).map((option) => (
-                    <option key={option} value={option}>{option}</option>
-                  ))}
-                </select>
-              </div>
-              <div className="flex flex-col">
-                <label className="text-lg font-semibold text-gray-700 mb-2">Breed</label>
-                <select
-                  {...register("breed", { required: true })}
-                  className="border border-[#C499F3] rounded-lg shadow-sm focus:ring-2 focus:ring-[#7360DF] w-full px-4 py-2"
-                >
-                  <option value="">Select a breed</option>
-                  {breeds.map((breed) => (
-                    <option key={breed} value={breed}>{breed}</option>
-                  ))}
-                </select>
-              </div>
-            </div>
-
-            {/* Images */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="flex flex-col">
-                <label className="text-lg font-semibold text-gray-700 mb-2">Pet Image</label>
-                <input
-                  type="file"
-                  accept="image/png, image/jpg, image/jpeg, image/gif"
-                  {...register("petImage", { required: !post })}
-                  className="border border-[#C499F3] rounded-lg shadow-sm focus:ring-2 focus:ring-[#7360DF] w-full px-4 py-2"
-                />
-                {post?.petImage && (
-                  <div className="mt-2">
-                    <img
-                      src={service.getFilePreview(post.petImage)}
-                      alt="Pet Image"
-                      className="w-full h-auto rounded-lg shadow-sm"
-                    />
-                  </div>
-                )}
-              </div>
-              <div className="flex flex-col">
-                <label className="text-lg font-semibold text-gray-700 mb-2">Medical Image</label>
-                <input
-                  type="file"
-                  accept="image/png, image/jpg, image/jpeg, image/gif"
-                  {...register("medicalImage", { required: !post })}
-                  className="border border-[#C499F3] rounded-lg shadow-sm focus:ring-2 focus:ring-[#7360DF] w-full px-4 py-2"
-                />
-                {post?.medicalImage && (
-                  <div className="mt-2">
-                    <img
-                      src={service.getFilePreview(post.medicalImage)}
-                      alt="Medical Image"
-                      className="w-full h-auto rounded-lg shadow-sm"
-                    />
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Location and Age */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="flex flex-col">
-                <label className="text-lg font-semibold text-gray-700 mb-2">Location</label>
-                <select
-                  {...register("location", { required: true })}
-                  className="border border-[#C499F3] rounded-lg shadow-sm focus:ring-2 focus:ring-[#7360DF] w-full px-4 py-2"
-                >
-                  <option value="">Select a location</option>
-                  {locationOptions.map((location) => (
-                    <option key={location} value={location}>{location}</option>
-                  ))}
-                </select>
-              </div>
-              <div className="flex flex-col">
-                <label className="text-lg font-semibold text-gray-700 mb-2">Age (in weeks)</label>
-                <input
-                  type="number"
-                  {...register("age", { 
-                    required: true,
-                    min: 0,
-                    valueAsNumber: true,
-                    validate: (value) => value >= 0 || "Age must be a positive number"
-                  })}
-                  min="0"
-                  step="1"
-                  onKeyPress={(e) => {
-                    if (e.key === '-' || e.key === '+' || e.key === 'e') {
-                      e.preventDefault();
-                    }
-                  }}
-                  onChange={(e) => {
-                    const value = e.target.value;
-                    if (value < 0) {
-                      e.target.value = 0;
-                    }
-                  }}
-                  className="border border-[#C499F3] rounded-lg shadow-sm focus:ring-2 focus:ring-[#7360DF] w-full px-4 py-2"
-                />
-              </div>
-            </div>
-
-            {/* Seller Number and Gender */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="flex flex-col">
-                <label className="text-lg font-semibold text-gray-700 mb-2">Seller Number</label>
-                <input
-                  type="tel"
-                  {...register("sellerNumber", { required: true })}
-                  maxLength="10"
-                  pattern="\d{10}"
-                  className="border border-[#C499F3] rounded-lg shadow-sm focus:ring-2 focus:ring-[#7360DF] w-full px-4 py-2"
-                />
-              </div>
-              <div className="flex flex-col">
-                <label className="text-lg font-semibold text-gray-700 mb-2">Gender</label>
-                <select
-                  {...register("gender", { required: true })}
-                  className="border border-[#C499F3] rounded-lg shadow-sm focus:ring-2 focus:ring-[#7360DF] w-full px-4 py-2"
-                >
-                  <option value="Male">Male</option>
-                  <option value="Female">Female</option>
-                </select>
-              </div>
-            </div>
-
-            {/* Price and Adopt */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="flex flex-col">
-                <label className="text-lg font-semibold text-gray-700 mb-2">Price</label>
-                <input
-                  type="number"
-                  {...register("Price", { 
-                    required: !isAdopt,
-                    min: 0,
-                    valueAsNumber: true,
-                    validate: (value) => value >= 0 || "Price must be a positive number"
-                  })}
-                  disabled={isAdopt}
-                  min="0"
-                  step="1"
-                  onKeyPress={(e) => {
-                    if (e.key === '-' || e.key === '+' || e.key === 'e') {
-                      e.preventDefault();
-                    }
-                  }}
-                  onChange={(e) => {
-                    const value = parseFloat(e.target.value);
-                    if (value < 0) {
-                      e.target.value = '0';
-                    }
-                  }}
-                  className={`border border-[#C499F3] rounded-lg shadow-sm focus:ring-2 focus:ring-[#7360DF] w-full px-4 py-2 ${
-                    isAdopt ? 'bg-gray-100' : ''
-                  }`}
-                />
-              </div>
-              <div className="flex flex-col">
-                <label className="text-lg font-semibold text-gray-700 mb-2">Adoption Status</label>
-                <div className="flex items-center h-full">
-                  <input
-                    type="checkbox"
-                    id="adopt"
-                    {...register("adopt")}
-                    checked={isAdopt}
-                    onChange={handleAdoptChange}
-                    className="mr-2 h-5 w-5 text-[#7360DF] border-[#C499F3] rounded focus:ring-2 focus:ring-[#7360DF]"
-                  />
-                  <label htmlFor="adopt" className="text-lg text-gray-700">Available for Adoption</label>
-                </div>
-              </div>
-            </div>
-
-            {/* Submit Button */}
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="w-full bg-[#7360DF] text-white py-3 rounded-lg font-semibold shadow-md hover:bg-opacity-90 focus:outline-none focus:ring-4 focus:ring-[#C499F3] transition disabled:opacity-50"
+    <div className="min-h-screen bg-gradient-to-br from-[#C499F3] via-[#F2AFEF] to-[#7360DF] p-6">
+      <div className="max-w-4xl mx-auto bg-white shadow-xl rounded-lg p-6">
+        <h2 className="text-3xl font-bold text-center text-[#7360DF] mb-8">
+          {post ? "Update Your Pet Listing" : "Sell Your Pet"}
+        </h2>
+        <form onSubmit={handleSubmit(submit)} className="space-y-6">
+          {/* Type Dropdown */}
+          <div className="flex flex-col mb-4">
+            <label className="text-lg font-semibold text-gray-700">
+              Pet Type
+            </label>
+            <select
+              {...register("type", { required: true })}
+              onChange={(e) => {
+                setType(e.target.value);
+                setValue("type", e.target.value);
+                setValue("breed", "");
+              }}
+              className="mt-2 border border-[#C499F3] rounded-lg shadow-sm focus:ring-2 focus:ring-[#7360DF] w-full px-4 py-2"
             >
-              {isLoading ? "Processing..." : (post ? "Update Listing" : "Create Listing")}
-            </button>
-          </form>
-        </div>
-      </div>
-
-      {/* Loading Overlay */}
-      {isLoading && (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center">
-          <div className="bg-white p-8 rounded-lg shadow-xl flex flex-col items-center">
-            <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-[#7360DF]"></div>
-            <p className="mt-4 text-lg font-semibold text-[#7360DF]">Processing your request...</p>
+              {Object.keys(petOptions).map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
           </div>
-        </div>
-      )}
+
+          {/* Breed Dropdown */}
+          <div className="flex flex-col mb-4">
+            <label className="text-lg font-semibold text-gray-700">Breed</label>
+            <select
+              {...register("breed", { required: true })}
+              className="mt-2 border border-[#C499F3] rounded-lg shadow-sm focus:ring-2 focus:ring-[#7360DF] w-full px-4 py-2"
+            >
+              <option value="">Select a breed</option>
+              {breeds.map((breed) => (
+                <option key={breed} value={breed}>
+                  {breed}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* Location Dropdown */}
+          <div className="flex flex-col mb-4">
+            <label className="text-lg font-semibold text-gray-700">
+              Location
+            </label>
+            <select
+              {...register("location", { required: true })}
+              className="mt-2 border border-[#C499F3] rounded-lg shadow-sm focus:ring-2 focus:ring-[#7360DF] w-full px-4 py-2"
+            >
+              <option value="">Select a location</option>
+              {locationOptions.map((location) => (
+                <option key={location} value={location}>
+                  {location}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* Age Input */}
+          <div className="flex flex-col mb-4">
+            <label className="text-lg font-semibold text-gray-700">
+              Age (in weeks)
+            </label>
+            <Input
+              type="number"
+              {...register("age", { required: true })}
+              className="mt-2 border border-[#C499F3] rounded-lg shadow-sm focus:ring-2 focus:ring-[#7360DF]"
+            />
+          </div>
+
+          {/* Contact Number Input */}
+          <div className="flex flex-col mb-4">
+            <label className="text-lg font-semibold text-gray-700">
+              Contact Number
+            </label>
+            <Input
+              type="tel"
+              {...register("sellerNumber", { required: true })}
+              maxLength="10"
+              pattern="\d{10}"
+              className="mt-2 border border-[#C499F3] rounded-lg shadow-sm focus:ring-2 focus:ring-[#7360DF]"
+            />
+          </div>
+
+          {/* Gender Dropdown */}
+          <div className="flex flex-col mb-4">
+            <label className="text-lg font-semibold text-gray-700">Gender</label>
+            <select
+              {...register("gender", { required: true })}
+              className="mt-2 border border-[#C499F3] rounded-lg shadow-sm focus:ring-2 focus:ring-[#7360DF] w-full px-4 py-2"
+            >
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+          </div>
+
+          {/* Pet Image Input */}
+          <div className="flex flex-col mb-4">
+            <label className="text-lg font-semibold text-gray-700">
+              Pet Image
+            </label>
+            <Input
+              type="file"
+              accept="image/png, image/jpg, image/jpeg, image/gif"
+              {...register("image1", { required: !post })}
+              className="mt-2 border border-[#C499F3] rounded-lg"
+            />
+            {post?.petImage && (
+              <div className="mt-2">
+                <img
+                  src={service.getFilePreview(post.petImage)}
+                  alt="Pet Image"
+                  className="w-full h-auto rounded-lg shadow-sm"
+                />
+              </div>
+            )}
+          </div>
+
+          {/* Vaccination Image Input */}
+          <div className="flex flex-col mb-4">
+            <label className="text-lg font-semibold text-gray-700">
+              Vaccination Image
+            </label>
+            <Input
+              type="file"
+              accept="image/png, image/jpg, image/jpeg, image/gif"
+              {...register("image2", { required: !post })}
+              className="mt-2 border border-[#C499F3] rounded-lg"
+            />
+            {post?.medicalImage && (
+              <div className="mt-2">
+                <img
+                  src={service.getFilePreview(post.medicalImage)}
+                  alt="Vaccination Image"
+                  className="w-full h-auto rounded-lg shadow-sm"
+                />
+              </div>
+            )}
+          </div>
+
+          {/* Price and Adopt Checkbox */}
+          <div className="flex items-center space-x-4 mb-4">
+            <div className="flex flex-col w-full">
+              <label className="text-lg font-semibold text-gray-700">Price</label>
+              <Input
+                type="number"
+                {...register("Price", { required: true })}
+                disabled={isAdopt}
+                className={`mt-2 border border-[#C499F3] rounded-lg shadow-sm focus:ring-2 focus:ring-[#7360DF] ${
+                  isAdopt ? 'bg-gray-100' : ''
+                }`}
+              />
+            </div>
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                {...register("adopt", { required: isAdopt })}
+                checked={isAdopt}
+                onChange={handleAdoptChange}
+                className="mr-2 h-5 w-5 text-[#7360DF] border-[#C499F3] rounded focus:ring-2 focus:ring-[#7360DF]"
+              />
+              <label className="text-lg text-gray-700">Adopt</label>
+            </div>
+          </div>
+
+          {/* Status Dropdown (hidden) */}
+          <div className="hidden flex-col mb-6">
+            <label className="text-lg font-semibold text-gray-700">Status</label>
+            <select
+              {...register("status", { required: true })}
+              className="mt-2 border border-[#C499F3] rounded-lg shadow-sm focus:ring-2 focus:ring-[#7360DF] w-full px-4 py-2"
+            >
+              <option value="active">Active</option>
+              <option value="inactive">Inactive</option>
+            </select>
+          </div>
+
+          {/* Submit Button */}
+          <button
+            type="submit"
+            disabled={isLoading}
+            className="w-full bg-[#7360DF] text-white py-3 rounded-lg font-semibold shadow-md hover:bg-opacity-90 focus:outline-none focus:ring-4 focus:ring-[#C499F3] transition disabled:opacity-50"
+          >
+            {isLoading ? "Processing..." : (post ? "Update" : "Submit")}
+          </button>
+        </form>
+
+        {/* Loading Overlay */}
+        {isLoading && (
+          <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center">
+            <div className="bg-white p-8 rounded-lg shadow-xl flex flex-col items-center">
+              <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-[#7360DF]"></div>
+              <p className="mt-4 text-lg font-semibold text-[#7360DF]">Processing your request...</p>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
