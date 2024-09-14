@@ -36,7 +36,7 @@ const Home = () => {
         setPosts(userPosts);
       }
     });
-    authService.getCurrentUser().then((state) => Setuser(state.status));
+    authService.getCurrentUser().then((state) => Setuser(state.auth.status));
 
     const slideInterval = setInterval(() => {
       setCurrentSlide((prevSlide) => (prevSlide + 1) % carouselImages.length);
