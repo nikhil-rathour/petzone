@@ -13,7 +13,7 @@ function SellPet() {
 
   const navigate = useNavigate();
   const userData = useSelector((state) => state.auth.userData);
-  console.log(userData.$id)
+  console.log(userData)
 
   const petOptions = {
     Dog: ['Labrador', 'Pug', 'Beagle', 'German Shepherd', 'shih tzu', 'rottweiler'],
@@ -37,9 +37,9 @@ function SellPet() {
   }, [slug, navigate]);
 
   const setDefaultValues = (postData) => {
-    setValue("Type", postData.Type);
+    setValue("type", postData.Type);
     setValue("breed", postData.breed);
-    setValue("Gender", postData.Gender);
+    setValue("gender", postData.Gender);
     setValue("age", postData.age);
     setValue("sellerNumber", postData.phone);
     setValue("location", postData.location);
@@ -73,44 +73,46 @@ function SellPet() {
     console.log("Form data:", data);
     try {
       // File upload logic
-      let file1 = null;
-      let file2 = null;
+      let petImageFile = null;
+      let medicalImageFile = null;
 
-      if (data.image1 && data.image1[0]) {
+      if (data.petImage && data.petImage[0]) {
         try {
-          file1 = await service.uploadFile(data.image1[0]);
-          console.log("Pet image uploaded successfully:", file1);
+          petImageFile = await service.uploadFile(data.petImage[0]);
+          console.log("Pet image uploaded successfully:", petImageFile);
         } catch (error) {
           console.error("Error uploading pet image:", error);
           throw new Error("Failed to upload pet image");
         }
       }
 
-      if (data.image2 && data.image2[0]) {
+      if (data.medicalImage && data.medicalImage[0]) {
         try {
-          file2 = await service.uploadFile(data.image2[0]);
-          console.log("Vaccination image uploaded successfully:", file2);
+          medicalImageFile = await service.uploadFile(data.medicalImage[0]);
+          console.log("Medical image uploaded successfully:", medicalImageFile);
         } catch (error) {
-          console.error("Error uploading vaccination image:", error);
-          throw new Error("Failed to upload vaccination image");
+          console.error("Error uploading medical image:", error);
+          throw new Error("Failed to upload medical image");
         }
       }
 
-      console.log("Uploaded files:", { file1, file2 });
+      console.log("Uploaded files:", { petImageFile, medicalImageFile });
 
       const postData = {
-        Type: data.Type,
+        type: data.type,
         breed: data.breed,
-        Gender: data.Gender,
-        age: data.age,
-        petImage: file1 ? file1.$id : post?.petImage,
-        VaccinationImg: file2 ? file2.$id : post?.VaccinationImg,
-        phone: data.sellerNumber,
+        petImage: petImageFile ? petImageFile.$id : post?.petImage,
+        medicalImage: medicalImageFile ? medicalImageFile.$id : post?.medicalImage,
+        sellerName: userData.name,
         location: data.location,
-        Price: data.adopt ? "0" : data.Price,
+        age: data.age,
+        sellerNumber: data.sellerNumber,
+        adopt: data.adopt === "true",
         status: "active",
-        adopt: data.adopt,
         userId: userData.$id,
+        Price: data.adopt === "true" ? "0" : data.Price,
+        gender: data.gender,
+        postDate: new Date().toISOString(),
       };
 
       console.log("Post data:", postData);
@@ -118,13 +120,13 @@ function SellPet() {
       let dbPost;
       if (post) {
         // Update existing post
-        if (file1 && post.petImage) {
+        if (petImageFile && post.petImage) {
           console.log("Deleting old pet image");
           await service.deleteFile(post.petImage);
         }
-        if (file2 && post.VaccinationImg) {
-          console.log("Deleting old vaccination image");
-          await service.deleteFile(post.VaccinationImg);
+        if (medicalImageFile && post.medicalImage) {
+          console.log("Deleting old medical image");
+          await service.deleteFile(post.medicalImage);
         }
 
         console.log("Updating post");
@@ -163,22 +165,18 @@ function SellPet() {
         <form onSubmit={handleSubmit(submit)} className="space-y-6">
           {/* Type Dropdown */}
           <div className="flex flex-col mb-4">
-            <label className="text-lg font-semibold text-gray-700">
-              Pet Type
-            </label>
+            <label className="text-lg font-semibold text-gray-700">Pet Type</label>
             <select
-              {...register("Type", { required: true })}
+              {...register("type", { required: true })}
               onChange={(e) => {
                 setType(e.target.value);
-                setValue("Type", e.target.value);
+                setValue("type", e.target.value);
                 setValue("breed", "");
               }}
               className="mt-2 border border-[#C499F3] rounded-lg shadow-sm focus:ring-2 focus:ring-[#7360DF] w-full px-4 py-2"
             >
               {Object.keys(petOptions).map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
+                <option key={option} value={option}>{option}</option>
               ))}
             </select>
           </div>
@@ -192,78 +190,18 @@ function SellPet() {
             >
               <option value="">Select a breed</option>
               {breeds.map((breed) => (
-                <option key={breed} value={breed}>
-                  {breed}
-                </option>
+                <option key={breed} value={breed}>{breed}</option>
               ))}
-            </select>
-          </div>
-
-          {/* Location Dropdown */}
-          <div className="flex flex-col mb-4">
-            <label className="text-lg font-semibold text-gray-700">
-              Location
-            </label>
-            <select
-              {...register("location", { required: true })}
-              className="mt-2 border border-[#C499F3] rounded-lg shadow-sm focus:ring-2 focus:ring-[#7360DF] w-full px-4 py-2"
-            >
-              <option value="">Select a location</option>
-              {locationOptions.map((location) => (
-                <option key={location} value={location}>
-                  {location}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          {/* Age Input */}
-          <div className="flex flex-col mb-4">
-            <label className="text-lg font-semibold text-gray-700">
-              Age (in weeks)
-            </label>
-            <Input
-              type="number"
-              {...register("age", { required: true })}
-              className="mt-2 border border-[#C499F3] rounded-lg shadow-sm focus:ring-2 focus:ring-[#7360DF]"
-            />
-          </div>
-
-          {/* Contact Number Input */}
-          <div className="flex flex-col mb-4">
-            <label className="text-lg font-semibold text-gray-700">
-              Contact Number
-            </label>
-            <Input
-              type="tel"
-              {...register("sellerNumber", { required: true })}
-              maxLength="10"
-              pattern="\d{10}"
-              className="mt-2 border border-[#C499F3] rounded-lg shadow-sm focus:ring-2 focus:ring-[#7360DF]"
-            />
-          </div>
-
-          {/* Gender Dropdown */}
-          <div className="flex flex-col mb-4">
-            <label className="text-lg font-semibold text-gray-700">Gender</label>
-            <select
-              {...register("Gender", { required: true })}
-              className="mt-2 border border-[#C499F3] rounded-lg shadow-sm focus:ring-2 focus:ring-[#7360DF] w-full px-4 py-2"
-            >
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
             </select>
           </div>
 
           {/* Pet Image Input */}
           <div className="flex flex-col mb-4">
-            <label className="text-lg font-semibold text-gray-700">
-              Pet Image
-            </label>
+            <label className="text-lg font-semibold text-gray-700">Pet Image</label>
             <Input
               type="file"
               accept="image/png, image/jpg, image/jpeg, image/gif"
-              {...register("image1", { required: !post })}
+              {...register("petImage", { required: !post })}
               className="mt-2 border border-[#C499F3] rounded-lg"
             />
             {post?.petImage && (
@@ -277,26 +215,82 @@ function SellPet() {
             )}
           </div>
 
-          {/* Vaccination Image Input */}
+          {/* Medical Image Input */}
           <div className="flex flex-col mb-4">
-            <label className="text-lg font-semibold text-gray-700">
-              Vaccination Image
-            </label>
+            <label className="text-lg font-semibold text-gray-700">Medical Image</label>
             <Input
               type="file"
               accept="image/png, image/jpg, image/jpeg, image/gif"
-              {...register("image2", { required: !post })}
+              {...register("medicalImage", { required: !post })}
               className="mt-2 border border-[#C499F3] rounded-lg"
             />
-            {post?.VaccinationImg && (
+            {post?.medicalImage && (
               <div className="mt-2">
                 <img
-                  src={service.getFilePreview(post.VaccinationImg)}
-                  alt="Vaccination Image"
+                  src={service.getFilePreview(post.medicalImage)}
+                  alt="Medical Image"
                   className="w-full h-auto rounded-lg shadow-sm"
                 />
               </div>
             )}
+          </div>
+
+          {/* Seller Name Input */}
+          {/* <div className="flex flex-col mb-4">
+            <label className="text-lg font-semibold text-gray-700">Seller Name</label>
+            <Input
+              type="text"
+              {...register("sellerName", { required: true })}
+              className="mt-2 border border-[#C499F3] rounded-lg shadow-sm focus:ring-2 focus:ring-[#7360DF]"
+            />
+          </div> */}
+
+          {/* Location Dropdown */}
+          <div className="flex flex-col mb-4">
+            <label className="text-lg font-semibold text-gray-700">Location</label>
+            <select
+              {...register("location", { required: true })}
+              className="mt-2 border border-[#C499F3] rounded-lg shadow-sm focus:ring-2 focus:ring-[#7360DF] w-full px-4 py-2"
+            >
+              <option value="">Select a location</option>
+              {locationOptions.map((location) => (
+                <option key={location} value={location}>{location}</option>
+              ))}
+            </select>
+          </div>
+
+          {/* Age Input */}
+          <div className="flex flex-col mb-4">
+            <label className="text-lg font-semibold text-gray-700">Age (in weeks)</label>
+            <Input
+              type="number"
+              {...register("age", { required: true })}
+              className="mt-2 border border-[#C499F3] rounded-lg shadow-sm focus:ring-2 focus:ring-[#7360DF]"
+            />
+          </div>
+
+          {/* Seller Number Input */}
+          <div className="flex flex-col mb-4">
+            <label className="text-lg font-semibold text-gray-700">Seller Number</label>
+            <Input
+              type="tel"
+              {...register("sellerNumber", { required: true })}
+              maxLength="10"
+              pattern="\d{10}"
+              className="mt-2 border border-[#C499F3] rounded-lg shadow-sm focus:ring-2 focus:ring-[#7360DF]"
+            />
+          </div>
+
+          {/* Gender Dropdown */}
+          <div className="flex flex-col mb-4">
+            <label className="text-lg font-semibold text-gray-700">Gender</label>
+            <select
+              {...register("gender", { required: true })}
+              className="mt-2 border border-[#C499F3] rounded-lg shadow-sm focus:ring-2 focus:ring-[#7360DF] w-full px-4 py-2"
+            >
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
           </div>
 
           {/* Price and Adopt Checkbox */}
@@ -305,7 +299,7 @@ function SellPet() {
               <label className="text-lg font-semibold text-gray-700">Price</label>
               <Input
                 type="number"
-                {...register("Price", { required: true })}
+                {...register("Price", { required: !isAdopt })}
                 disabled={isAdopt}
                 className={`mt-2 border border-[#C499F3] rounded-lg shadow-sm focus:ring-2 focus:ring-[#7360DF] ${
                   isAdopt ? 'bg-gray-100' : ''
@@ -315,25 +309,13 @@ function SellPet() {
             <div className="flex items-center">
               <input
                 type="checkbox"
-                {...register("adopt", { required: isAdopt })}
+                {...register("adopt")}
                 checked={isAdopt}
                 onChange={handleAdoptChange}
                 className="mr-2 h-5 w-5 text-[#7360DF] border-[#C499F3] rounded focus:ring-2 focus:ring-[#7360DF]"
               />
               <label className="text-lg text-gray-700">Adopt</label>
             </div>
-          </div>
-
-          {/* Status Dropdown (hidden) */}
-          <div className="hidden flex-col mb-6">
-            <label className="text-lg font-semibold text-gray-700">Status</label>
-            <select
-              {...register("status", { required: true })}
-              className="mt-2 border border-[#C499F3] rounded-lg shadow-sm focus:ring-2 focus:ring-[#7360DF] w-full px-4 py-2"
-            >
-              <option value="active">Active</option>
-              <option value="inactive">Inactive</option>
-            </select>
           </div>
 
           {/* Submit Button */}
