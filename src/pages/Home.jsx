@@ -94,156 +94,156 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#AD49E1] to-[#EBD3F8]">
       {/* Carousel */}
-      <div className="relative w-full overflow-hidden">
+      <div className="relative w-full overflow-hidden h-80 md:h-96 lg:h-[28rem]">
         <div
-          className="flex transition-transform duration-1000 ease-in-out"
+          className="flex transition-transform duration-1000 ease-in-out h-full"
           style={{ transform: `translateX(-${currentSlide * 100}%)` }}
         >
           {carouselImages.map((image, index) => (
-            <div key={index} className="w-full flex-shrink-0">
-              <img src={image} alt={`Slide ${index}`} className="w-full h-56 md:h-64 lg:h-72 object-cover" />
+            <div key={index} className="w-full flex-shrink-0 relative">
+              <img src={image} alt={`Slide ${index}`} className="w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white text-center px-4">
+                  {index === 0 && "PetZone Where Every Tail Wags Happily"}
+                  {index === 1 && "Love, Care, and Joy for Every Pet"}
+                  {index === 2 && "Your Pet's Happiness is Our Priority"}
+                </h1>
+              </div>
             </div>
           ))}
         </div>
 
-        {/* Previous Arrow */}
+        {/* Carousel navigation buttons */}
         <button
           onClick={goToPreviousSlide}
-          className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-transparent text-white p-2 rounded-full hover:bg-white hover:bg-opacity-20 transition-colors duration-300"
+          className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white bg-opacity-30 text-white p-2 rounded-full hover:bg-opacity-50 transition-colors duration-300"
         >
           <span className="text-2xl">&lt;</span>
         </button>
-
-        {/* Next Arrow */}
         <button
           onClick={goToNextSlide}
-          className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-transparent text-white p-2 rounded-full hover:bg-white hover:bg-opacity-20 transition-colors duration-300"
+          className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white bg-opacity-30 text-white p-2 rounded-full hover:bg-opacity-50 transition-colors duration-300"
         >
           <span className="text-2xl">&gt;</span>
         </button>
       </div>
 
       {/* Filters */}
-      <div className="container mx-auto px-6 py-6">
-        <h2 className="text-3xl font-bold mb-6">
+      <div className="container mx-auto px-6 py-12">
+        <h2 className="text-3xl font-bold mb-8 text-white text-center">
           Find Your Perfect Pet
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          {/* Pet Type Filter */}
-          <div>
-            <label className="block text-gray-700 font-medium mb-2">Pet Type</label>
-            <select
-              value={selectedPet}
-              onChange={handlePetChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500"
-            >
-              <option value="Dog">Dog</option>
-              <option value="Cat">Cat</option>
-            </select>
-          </div>
+        <div className="bg-white rounded-lg shadow-lg p-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            {/* Pet Type Filter */}
+            <div>
+              <label className="block text-gray-700 font-medium mb-2">Pet Type</label>
+              <select
+                value={selectedPet}
+                onChange={handlePetChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#7360DF]"
+              >
+                <option value="Dog">Dog</option>
+                <option value="Cat">Cat</option>
+              </select>
+            </div>
 
-          {/* Breed Filter */}
-          <div>
-            <label className="block text-gray-700 font-medium mb-2">Breed</label>
-            <select
-              value={selectedBreed}
-              onChange={handleBreedChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500"
-            >
-              {breeds.map((breed) => (
-                 <option key={breed} value={breed}>
-                  {breed}
-                </option>
-              ))}
-            </select>
-          </div>
+            {/* Breed Filter */}
+            <div>
+              <label className="block text-gray-700 font-medium mb-2">Breed</label>
+              <select
+                value={selectedBreed}
+                onChange={handleBreedChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#7360DF]"
+              >
+                {breeds.map((breed) => (
+                  <option key={breed} value={breed}>
+                    {breed}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-          {/* Gender Filter */}
-          <div>
-            <label className="block text-gray-700 font-medium mb-2">Gender</label>
-            <select
-              value={selectedGender}
-              onChange={handleGenderChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500"
-            >
-              <option value="All">All</option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-            </select>
-          </div>
+            {/* Gender Filter */}
+            <div>
+              <label className="block text-gray-700 font-medium mb-2">Gender</label>
+              <select
+                value={selectedGender}
+                onChange={handleGenderChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#7360DF]"
+              >
+                <option value="All">All</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </div>
 
-          {/* Location Filter */}
-          <div>
-            <label className="block text-gray-700 font-medium mb-2">Location</label>
-            <select
-              value={selectedLocation}
-              onChange={handleLocationChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500"
-            >
-              <option value="All">All</option>
-              <option value="Ahmedabad">Ahmedabad</option>
-              <option value="Gandhinagar">Gandhinagar</option>
-              <option value="Rajkot">Rajkot</option>
-              <option value="Surat">Surat</option>
-              <option value="Vadodara">Vadodara</option>
-            </select>
+            {/* Location Filter */}
+            <div>
+              <label className="block text-gray-700 font-medium mb-2">Location</label>
+              <select
+                value={selectedLocation}
+                onChange={handleLocationChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#7360DF]"
+              >
+                <option value="All">All</option>
+                <option value="Ahmedabad">Ahmedabad</option>
+                <option value="Gandhinagar">Gandhinagar</option>
+                <option value="Rajkot">Rajkot</option>
+                <option value="Surat">Surat</option>
+                <option value="Vadodara">Vadodara</option>
+              </select>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Posts */}
-      <div className="container mx-auto px-6 py-6">
-        <h2 className="text-3xl font-bold mb-6">
+      <div className="container mx-auto px-6 py-12">
+        <h2 className="text-3xl font-bold mb-8 text-white text-center">
           Available Pets
         </h2>
         {filteredPosts.length > 0 ? (
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredPosts.map((post, index) => (
-             post.adopt ? null :
-            
-             <div
-             key={index}
-             className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
-           >
-             <img
-        src={service.getFilePreview(post.petImage)}
-        alt={post.breed}
-        className="w-full h-56 object-cover"
-      />
-      <div className="p-4">
-        <p className="text-gray-600 mt-2">
-          <span className="font-medium">Pet Type:</span> {post.Type}
-        </p>
-        <p className="text-gray-600 mt-2">
-          <span className="font-medium">Breed:</span> {parse(post.breed)}
-        </p>
-        <p className="text-gray-600 mt-1">
-          <span className="font-medium">Gender:</span> {post.Gender}
-        </p>
-        <p className="text-gray-600 mt-1">
-          <span className="font-medium">Location:</span> {post.location}
-        </p>
-        <Link to={`/post/${post.$id}`}>
-        <button className="mt-4 w-full bg-[#7360DF] text-white py-2 px-4 rounded-md hover:bg-opacity-90 transition-colors duration-300">
-          View Details
-        </button>
-        </Link>
-      </div>
-           </div>
-           
-             
+              !post.adopt && (
+                <div
+                  key={index}
+                  className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1"
+                >
+                  <img
+                    src={service.getFilePreview(post.petImage)}
+                    alt={post.breed}
+                    className="w-full h-64 object-cover"
+                  />
+                  <div className="p-6">
+                    <h3 className="text-xl font-semibold mb-4">{parse(post.breed)}</h3>
+                    <p className="text-gray-600 mb-2">
+                      <span className="font-medium">Pet Type:</span> {post.Type}
+                    </p>
+                    <p className="text-gray-600 mb-2">
+                      <span className="font-medium">Gender:</span> {post.Gender}
+                    </p>
+                    <p className="text-gray-600 mb-4">
+                      <span className="font-medium">Location:</span> {post.location}
+                    </p>
+                    <Link to={`/post/${post.$id}`}>
+                      <button className="w-full bg-[#7360DF] text-white py-2 px-4 rounded-md hover:bg-opacity-90 transition-colors duration-300">
+                        View Details
+                      </button>
+                    </Link>
+                  </div>
+                </div>
+              )
             ))}
           </div>
         ) : (
-          <div className="text-center py-20 bg-white rounded-lg shadow-md">
+          <div className="text-center py-20 bg-white rounded-lg shadow-lg">
             <h2 className="text-2xl font-semibold text-gray-800">No pets found</h2>
             <p className="text-gray-600 mt-4">Try adjusting your search criteria.</p>
           </div>
         )}
       </div>
-
-  
     </div>
   );
 };
