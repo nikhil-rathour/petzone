@@ -32,38 +32,8 @@ const PetFood = () => {
         "https://static.vecteezy.com/system/resources/previews/004/141/669/non_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg",
       name: "Puppy Chow",
       petType: "Dog",
-      breed: "Golden Retriever",
-      description: "Special formula for Golden Retriever puppies.",
-      price: "999",
-    },
-    {
-      id: 4,
-      photo:
-        "https://static.vecteezy.com/system/resources/previews/004/141/669/non_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg",
-      name: "Fish Flakes",
-      petType: "Fish",
-      breed: "Goldfish",
-      description: "Nutrient-rich flakes for Goldfish.",
-      price: "999",
-    },
-    {
-      id: 5,
-      photo:
-        "https://m.media-amazon.com/images/I/61TaEvXhyyL.SX300_SY300_QL70_FMwebp.jpghttps://static.vecteezy.com/system/resources/previews/004/141/669/non_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg",
-      name: "Bird Seed Mix",
-      petType: "Bird",
-      breed: "Parrot",
-      description: "Premium seed mix for Parrots.",
-      price: "999",
-    },
-    {
-      id: 6,
-      photo:
-        "https://static.vecteezy.com/system/resources/previews/004/141/669/non_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg",
-      name: "Rabbit Pellets",
-      petType: "Rabbit",
-      breed: "Angora",
-      description: "Balanced diet for Angora rabbits.",
+      breed: "Labrador",
+      description: "Special formula for Labrador puppies.",
       price: "999",
     },
   ];
@@ -72,9 +42,6 @@ const PetFood = () => {
   const breedOptions = {
     Dog: ["Labrador", "Golden Retriever"],
     Cat: ["Siamese"],
-    Fish: ["Goldfish"],
-    Bird: ["Parrot"],
-    Rabbit: ["Angora"],
   };
 
   // Filter pet food based on selected pet type and breed
@@ -113,9 +80,6 @@ const PetFood = () => {
                 <option value="All">All Pets</option>
                 <option value="Dog">Dog</option>
                 <option value="Cat">Cat</option>
-                <option value="Fish">Fish</option>
-                <option value="Bird">Bird</option>
-                <option value="Rabbit">Rabbit</option>
               </select>
             </div>
 
