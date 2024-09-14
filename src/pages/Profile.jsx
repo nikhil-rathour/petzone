@@ -1,5 +1,5 @@
 import React from 'react';
-import LogOutBtn from '../components/Header/LogOutBtn';
+import LogoutBtn from '../components/Header/LogoutBtn';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom'
 
@@ -48,7 +48,7 @@ const ProfilePage = () => {
             </div>
           </div>
           
-          {authStatus && <LogOutBtn/>}
+          {authStatus && <LogoutBtn/>}
         </div>
       </div>
     </div>
