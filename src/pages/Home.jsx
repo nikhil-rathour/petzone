@@ -64,21 +64,22 @@ const Home = () => {
     setSelectedLocation(event.target.value);
   };
 
-  const getBreeds = (Type) => {
-    if (Type === 'Dog' ) {
-      return ['All', 'Labrador', 'Pug', 'Beagle', 'German Shepherd', 'shih tzu', 'rottweiler',];
-    } else if (Type === 'Cat') {
-      return ['All', 'Persian', 'Siamese', 'Indian Billi (Indigenous Cat)', 'Himalayan', 'Bengal', 'British Shorthair'];
-    }
-    return [];
+  const petOptions = {
+    Dog: ['Labrador', 'Pug', 'Beagle', 'German Shepherd', 'shih tzu', 'rottweiler'],
+    Cat: ['Persian', 'Siamese', 'Indian Billi (Indigenous Cat)', 'Himalayan', 'Bengal', 'British Shorthair'],
+  };
+  const locationOptions = ["Ahmedabad", "Gandhinagar", "Rajkot", "Surat", "Vadodara"];
+
+  const getBreeds = (type) => {
+    return petOptions[type] || [];
   };
 
   const breeds = getBreeds(selectedPet);
 
   const filteredPosts = posts.filter((post) => {
-    const matchesPet = post.Type === selectedPet;
+    const matchesPet = post.type === selectedPet;
     const matchesBreed = selectedBreed === 'All' || post.breed === selectedBreed;
-    const matchesGender = selectedGender === 'All' || post.Gender === selectedGender;
+    const matchesGender = selectedGender === 'All' || post.gender === selectedGender;
     const matchesLocation = selectedLocation === 'All' || post.location === selectedLocation;
     return matchesPet && matchesBreed && matchesGender && matchesLocation;
   });
@@ -143,8 +144,9 @@ const Home = () => {
                 onChange={handlePetChange}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#7360DF]"
               >
-                <option value="Dog">Dog</option>
-                <option value="Cat">Cat</option>
+                {Object.keys(petOptions).map((option) => (
+                  <option key={option} value={option}>{option}</option>
+                ))}
               </select>
             </div>
 
@@ -156,10 +158,9 @@ const Home = () => {
                 onChange={handleBreedChange}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#7360DF]"
               >
+                <option value="All">All</option>
                 {breeds.map((breed) => (
-                  <option key={breed} value={breed}>
-                    {breed}
-                  </option>
+                  <option key={breed} value={breed}>{breed}</option>
                 ))}
               </select>
             </div>
@@ -187,11 +188,9 @@ const Home = () => {
                 className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#7360DF]"
               >
                 <option value="All">All</option>
-                <option value="Ahmedabad">Ahmedabad</option>
-                <option value="Gandhinagar">Gandhinagar</option>
-                <option value="Rajkot">Rajkot</option>
-                <option value="Surat">Surat</option>
-                <option value="Vadodara">Vadodara</option>
+                {locationOptions.map((location) => (
+                  <option key={location} value={location}>{location}</option>
+                ))}
               </select>
             </div>
           </div>
@@ -219,13 +218,19 @@ const Home = () => {
                   <div className="p-6">
                     <h3 className="text-xl font-semibold mb-4">{parse(post.breed)}</h3>
                     <p className="text-gray-600 mb-2">
-                      <span className="font-medium">Pet Type:</span> {post.Type}
+                      <span className="font-medium">Pet Type:</span> {post.type}
                     </p>
                     <p className="text-gray-600 mb-2">
-                      <span className="font-medium">Gender:</span> {post.Gender}
+                      <span className="font-medium">Gender:</span> {post.gender}
+                    </p>
+                    <p className="text-gray-600 mb-2">
+                      <span className="font-medium">Age:</span> {post.age} weeks
+                    </p>
+                    <p className="text-gray-600 mb-2">
+                      <span className="font-medium">Location:</span> {post.location}
                     </p>
                     <p className="text-gray-600 mb-4">
-                      <span className="font-medium">Location:</span> {post.location}
+                      <span className="font-medium">Price:</span> ₹{post.Price}
                     </p>
                     <Link to={`/post/${post.$id}`}>
                       <button className="w-full bg-[#7360DF] text-white py-2 px-4 rounded-md hover:bg-opacity-90 transition-colors duration-300">
