@@ -1,7 +1,9 @@
 // src/PetCarePage.jsx
-import React from 'react';
+import React, { useState } from 'react';
 
 const PetCare = () => {
+  const [selectedPetType, setSelectedPetType] = useState("All");
+
   const pets = [
     {
       image: "https://example.com/golden-retriever.jpg",
@@ -115,31 +117,31 @@ const PetCare = () => {
     },
   ];
 
+  const filteredPets = selectedPetType === "All" 
+    ? pets 
+    : pets.filter(pet => pet.name.toLowerCase().includes(selectedPetType.toLowerCase()));
+
   const PetCard = ({ pet }) => {
     return (
-      <div className="max-w-sm rounded-lg overflow-hidden shadow-lg bg-white hover:shadow-xl transition-shadow duration-300">
-        <img className="w-full h-48 object-cover" src={pet.image} alt={pet.name} />
-        <div className="px-6 py-4">
-          <div className="font-bold text-2xl mb-3 text-[#7360DF]">{pet.name}</div>
-          <div className="space-y-2">
-            <p className="text-gray-700">
-              <span className="font-semibold text-[#C499F3]">Exercise:</span> {pet.exercise}
+      <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1">
+        <img className="w-full h-64 object-cover" src={pet.image} alt={pet.name} />
+        <div className="p-6">
+          <h3 className="text-xl font-semibold mb-4 text-[#7360DF]">{pet.name}</h3>
+          <p className="text-gray-600 mb-2">
+            <span className="font-medium text-[#C499F3]">Exercise:</span> {pet.exercise}
+          </p>
+          <p className="text-gray-600 mb-2">
+            <span className="font-medium text-[#C499F3]">Temperature:</span> {pet.temperature}
+          </p>
+          <p className="text-gray-600 mb-2">
+            <span className="font-medium text-[#C499F3]">Do's:</span> {pet.dos}
+          </p>
+          {pet.donts && (
+            <p className="text-gray-600 mb-4">
+              <span className="font-medium text-[#C499F3]">Don'ts:</span> {pet.donts}
             </p>
-            <p className="text-gray-700">
-              <span className="font-semibold text-[#C499F3]">Temperature:</span> {pet.temperature}
-            </p>
-            <p className="text-gray-700">
-              <span className="font-semibold text-[#C499F3]">Do's:</span> {pet.dos}
-            </p>
-            {pet.donts && (
-              <p className="text-gray-700">
-                <span className="font-semibold text-[#C499F3]">Don'ts:</span> {pet.donts}
-              </p>
-            )}
-          </div>
-        </div>
-        <div className="px-6 py-4 bg-gradient-to-r from-[#F2AFEF] to-[#C499F3]">
-          <button className="w-full bg-[#7360DF] text-white font-bold py-2 px-4 rounded-full hover:bg-opacity-90 transition-colors duration-300">
+          )}
+          <button className="w-full bg-[#7360DF] text-white py-2 px-4 rounded-md hover:bg-opacity-90 transition-colors duration-300">
             Learn More
           </button>
         </div>
@@ -148,16 +150,56 @@ const PetCare = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#C499F3] via-[#F2AFEF] to-[#7360DF] py-8">
-      <h1 className="text-4xl text-center font-bold text-[#e63579] p-4 rounded-lg mb-8 max-w-3xl mx-auto shadow-lg">
-        Pet Care Guide
-      </h1>
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {pets.map((pet, index) => (
-            <PetCard key={index} pet={pet} />
-          ))}
+    <div className="min-h-screen bg-gradient-to-br from-[#AD49E1] to-[#EBD3F8]">
+      {/* Header */}
+      <div className="relative w-full overflow-hidden h-80 md:h-96 lg:h-[28rem]">
+        <img
+          src="https://images.pexels.com/photos/5849096/pexels-photo-5849096.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+          alt="Pet Care Banner"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white text-center px-4">
+             Gentle Care for Your Furry Friends
+          </h1>
         </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="container mx-auto px-6 py-12">
+        <h2 className="text-3xl font-bold mb-8 text-white text-center">
+          Find Care Tips for Your Pet
+        </h2>
+        
+        {/* Filter */}
+        <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
+          <div>
+            <label className="block text-gray-700 font-medium mb-2">Pet Type</label>
+            <select
+              value={selectedPetType}
+              onChange={(e) => setSelectedPetType(e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#7360DF]"
+            >
+              <option value="All">All Pets</option>
+              <option value="Dog">Dogs</option>
+              <option value="Cat">Cats</option>
+            </select>
+          </div>
+        </div>
+
+        {/* Pet Cards */}
+        {filteredPets.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredPets.map((pet, index) => (
+              <PetCard key={index} pet={pet} />
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-20 bg-white rounded-lg shadow-lg">
+            <h2 className="text-2xl font-semibold text-gray-800">No pets found</h2>
+            <p className="text-gray-600 mt-4">Try adjusting your search criteria.</p>
+          </div>
+        )}
       </div>
     </div>
   );
