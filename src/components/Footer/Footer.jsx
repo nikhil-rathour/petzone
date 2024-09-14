@@ -36,7 +36,7 @@ const Footer = () => {
       </div>
 
       <div className="border-t border-gray-700 mt-10 pt-6 text-center">
-        <p><a href='https://github.com/Yugsingh05/hack'>&copy; {new Date().getFullYear()} PetZone. All Rights Reserved.</a></p>
+        <p><a href='https://github.com/nikhil-rathour/petzone'>&copy; {new Date().getFullYear()} PetZone. All Rights Reserved.</a></p>
       </div>
     </footer>
   );
