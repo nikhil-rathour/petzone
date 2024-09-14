@@ -17,7 +17,7 @@ const Home = () => {
   const carouselImages = [
     'https://images.pexels.com/photos/2607544/pexels-photo-2607544.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     'https://images.pexels.com/photos/3299905/pexels-photo-3299905.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    'https://images.pexels.com/photos/2272938/pexels-photo-2272938.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    'https://images.pexels.com/photos/1629781/pexels-photo-1629781.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
   ];
 
   const [posts,setPosts] = useState([])
