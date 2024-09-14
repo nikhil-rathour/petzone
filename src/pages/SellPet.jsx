@@ -55,13 +55,13 @@ function SellPet() {
     }
   }, [type]);
 
-  const [isAdopt, setIsAdopt] = useState(post?.adopt === true);
+  const [isAdopt, setIsAdopt] = useState(post?.adopt || false);
 
   const handleAdoptChange = (e) => {
-    const adoptValue = e.target.checked ? "true" : "false";
-    setIsAdopt(e.target.checked);
-    setValue("adopt", adoptValue);
-    if (e.target.checked) {
+    const isChecked = e.target.checked;
+    setIsAdopt(isChecked);
+    setValue("adopt", isChecked);
+    if (isChecked) {
       setValue("Price", "0");
     }
   };
@@ -112,6 +112,7 @@ function SellPet() {
         adopt: data.adopt,
         userId: userData.$id,
         sellerName: userData.name,
+        postDate: post ? post.postDate : new Date().toISOString(),
       };
 
       console.log("Post data:", postData);
@@ -136,7 +137,6 @@ function SellPet() {
         dbPost = await service.createPost({
           ...postData,
           slug: ID.unique(),
-          postDate: new Date().toISOString(),
         });
       }
 
@@ -226,7 +226,13 @@ function SellPet() {
             </label>
             <Input
               type="number"
-              {...register("age", { required: true })}
+              {...register("age", { 
+                required: true,
+                valueAsNumber: true,
+                validate: (value) => Number.isInteger(value) && value > 0
+              })}
+              min="1"
+              step="1"
               className="mt-2 border border-[#C499F3] rounded-lg shadow-sm focus:ring-2 focus:ring-[#7360DF]"
             />
           </div>
@@ -307,7 +313,12 @@ function SellPet() {
               <label className="text-lg font-semibold text-gray-700">Price</label>
               <Input
                 type="number"
-                {...register("Price", { required: true })}
+                {...register("Price", { 
+                  required: !isAdopt,
+                  min: 0,
+                  valueAsNumber: true
+                })}
+                
                 disabled={isAdopt}
                 className={`mt-2 border border-[#C499F3] rounded-lg shadow-sm focus:ring-2 focus:ring-[#7360DF] ${
                   isAdopt ? 'bg-gray-100' : ''
@@ -317,9 +328,11 @@ function SellPet() {
             <div className="flex items-center">
               <input
                 type="checkbox"
-                {...register("adopt", { required: isAdopt })}
+                {...register("adopt")}
                 checked={isAdopt}
-                onChange={handleAdoptChange}
+                onChange={(e) =>{handleAdoptChange, console.log(e.target.checked
+
+                )}}
                 className="mr-2 h-5 w-5 text-[#7360DF] border-[#C499F3] rounded focus:ring-2 focus:ring-[#7360DF]"
               />
               <label className="text-lg text-gray-700">Adopt</label>

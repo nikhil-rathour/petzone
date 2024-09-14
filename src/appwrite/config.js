@@ -57,7 +57,8 @@ export class Service {
         }
       );
     } catch (error) {
-      console.log("Appwrite serive :: createPost :: error", error);
+      console.log("Appwrite service :: createPost :: error", error);
+      throw error; // Propagate the error
     }
   }
 
@@ -75,6 +76,7 @@ export class Service {
           location,
           Price,
           adopt,
+          status,
     }
   ) {
     try {
@@ -94,10 +96,12 @@ export class Service {
           location,
           Price,
           adopt,
+          status,
         }
       )
     } catch (error) {
-      console.log("Appwrite serive :: updatePost :: error", error);
+      console.log("Appwrite service :: updatePost :: error", error);
+      throw error; // Propagate the error
     }
   }
 

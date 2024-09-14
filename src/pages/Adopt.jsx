@@ -10,9 +10,13 @@ const Adopt = () => {
   useEffect(() => {
     service.getPosts([]).then((postsResponse) => {
       if (postsResponse) {
-        const adoptionPosts = postsResponse.documents.filter(post => post.adopt).reverse();
+        const adoptionPosts = postsResponse.documents
+          .filter(post => post.adopt && post.status === "active")
+          .reverse();
         setPosts(adoptionPosts);
       }
+    }).catch(error => {
+      console.error("Error fetching posts:", error);
     });
   }, []);
 
@@ -62,12 +66,14 @@ const Adopt = () => {
                 />
                 <div className="p-6">
                   <h3 className="text-2xl font-semibold mb-4 text-[#7360DF]">{parse(pet.breed)} 🐾</h3>
-                  <p className="text-gray-600 mb-4">{pet.description}</p>
                   <p className="text-gray-600 mb-2">
-                    <span className="font-medium">Pet Type:</span> {pet.Type}
+                    <span className="font-medium">Pet Type:</span> {pet.type}
                   </p>
                   <p className="text-gray-600 mb-2">
-                    <span className="font-medium">Gender:</span> {pet.Gender}
+                    <span className="font-medium">Gender:</span> {pet.gender}
+                  </p>
+                  <p className="text-gray-600 mb-2">
+                    <span className="font-medium">Age:</span> {pet.age} weeks
                   </p>
                   <p className="text-gray-600 mb-4">
                     <span className="font-medium">Location:</span> {pet.location}
