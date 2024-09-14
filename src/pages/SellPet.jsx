@@ -291,7 +291,25 @@ function SellPet() {
                 <label className="text-lg font-semibold text-gray-700 mb-2">Age (in weeks)</label>
                 <input
                   type="number"
-                  {...register("age", { required: true })}
+                  {...register("age", { 
+                    required: true,
+                    min: 0,
+                    valueAsNumber: true,
+                    validate: (value) => value >= 0 || "Age must be a positive number"
+                  })}
+                  min="0"
+                  step="1"
+                  onKeyPress={(e) => {
+                    if (e.key === '-' || e.key === '+' || e.key === 'e') {
+                      e.preventDefault();
+                    }
+                  }}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    if (value < 0) {
+                      e.target.value = 0;
+                    }
+                  }}
                   className="border border-[#C499F3] rounded-lg shadow-sm focus:ring-2 focus:ring-[#7360DF] w-full px-4 py-2"
                 />
               </div>
@@ -327,8 +345,26 @@ function SellPet() {
                 <label className="text-lg font-semibold text-gray-700 mb-2">Price</label>
                 <input
                   type="number"
-                  {...register("Price", { required: !isAdopt })}
+                  {...register("Price", { 
+                    required: !isAdopt,
+                    min: 0,
+                    valueAsNumber: true,
+                    validate: (value) => value >= 0 || "Price must be a positive number"
+                  })}
                   disabled={isAdopt}
+                  min="0"
+                  step="1"
+                  onKeyPress={(e) => {
+                    if (e.key === '-' || e.key === '+' || e.key === 'e') {
+                      e.preventDefault();
+                    }
+                  }}
+                  onChange={(e) => {
+                    const value = parseFloat(e.target.value);
+                    if (value < 0) {
+                      e.target.value = '0';
+                    }
+                  }}
                   className={`border border-[#C499F3] rounded-lg shadow-sm focus:ring-2 focus:ring-[#7360DF] w-full px-4 py-2 ${
                     isAdopt ? 'bg-gray-100' : ''
                   }`}
