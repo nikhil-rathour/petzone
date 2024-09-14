@@ -56,35 +56,8 @@ const AboutUs = () => {
             </div>
 
             <p className="mt-10 text-lg font-medium text-gray-800 text-center">
-              Join us at <span className="font-bold text-[#e63579]">PetZone</span>, where we bring pet lovers and their beloved companions together in a caring, supportive, and informed environment. Let's make every pet’s life better, one paw at a time.
+              Join us at <span className="font-bold text-[#e63579]">PetZone</span>, where we bring pet lovers and their beloved companions together in a caring, supportive, and informed environment. Let's make every pet's life better, one paw at a time.
             </p>
-          </div>
-        </div>
-
-        {/* Mission and Why Choose Us sections */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-            <div className="bg-[#7360DF] p-4">
-              <h3 className="text-2xl font-bold text-white">Our Mission</h3>
-            </div>
-            <ul className="list-disc list-inside space-y-3 p-6 text-gray-800">
-              <li>To create a community where pets and their owners can thrive.</li>
-              <li>To provide valuable resources and tips for pet care.</li>
-              <li>To support the adoption of pets, ensuring they find loving homes.</li>
-              <li>To offer a platform where pet owners can connect, share, and learn from each other.</li>
-            </ul>
-          </div>
-
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-            <div className="bg-[#7360DF] p-4">
-              <h3 className="text-2xl font-bold text-white">Why Choose PetZone?</h3>
-            </div>
-            <ul className="list-disc list-inside space-y-3 p-6 text-gray-800">
-              <li><span className="font-bold text-[#e63579]">Comprehensive Resources:</span> From pet food to care tips, we've got everything you need.</li>
-              <li><span className="font-bold text-[#e63579]">Community Support:</span> Join a community of pet lovers who share your passion.</li>
-              <li><span className="font-bold text-[#e63579]">Easy Adoption Process:</span> Simplify the process of finding and adopting your next pet.</li>
-              <li><span className="font-bold text-[#e63579]">Trusted Sellers:</span> Connect with reputable sellers who care about the well-being of their pets.</li>
-            </ul>
           </div>
         </div>
 
