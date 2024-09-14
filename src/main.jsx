@@ -18,6 +18,9 @@ import Post from './pages/Post.jsx'
 import AboutUs from './pages/Aboutus.jsx'
 import EditPost from './pages/EditPost.jsx'
 import MyPost from './pages/MyPost.jsx'
+import Story from './pages/Story.jsx'
+import StoryForm from './pages/storyform.jsx'
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -26,6 +29,14 @@ const router = createBrowserRouter([
         {
             path: "/",
             element: <Home />,
+        },
+        {
+          path: "/story",
+          element: <Story/>,
+        },
+        {
+          path: "/storyform",
+          element: <StoryForm/>,
         },
         {
           path: "/sell",

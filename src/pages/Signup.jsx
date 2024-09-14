@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { login } from "../store/authSlice";
-import Input from "../Components/Input";
+import Input from "../components/Input";
 import authService from "../appwrite/auth";
 import { FaPaw, FaEnvelope, FaLock, FaUser } from "react-icons/fa";
 
