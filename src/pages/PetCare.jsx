@@ -6,21 +6,21 @@ const PetCare = () => {
 
   const pets = [
     {
-      image: "https://example.com/golden-retriever.jpg",
+      image: "https://example.com/goldenhttps://images.unsplash.com/photo-1539692177343-b2b990faef15?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D-retriever.jpg",
       name: 'Golden Retriever',
       exercise: 'Daily walks and playtime',
       temperature: '15-25°C',
       dos: 'Regular grooming, social interaction',
     },
     {
-      image: "https://example.com/siamese-cat.jpg",
+      image: "https://https://unsplash.com/photos/shallow-focus-photography-siamese-cat-7qau-YIXn90example.com/siamese-cat.jpg",
       name: 'Siamese Cat',
       exercise: 'Interactive toys and climbing',
       temperature: '20-30°C',
       dos: 'Regular vet visits, clean litter box',
     },
     {
-      image: "https://example.com/labrador.jpg",
+      image: "https://https://images.unsplash.com/photo-1527179122541-293c3b972d24?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8bGFicmFkb3J8ZW58MHx8MHx8fDA%3D.com/labrador.jpg",
       name: 'Labrador',
       exercise: '1-2 hours per day of walking, running, or playing fetch',
       temperature: '10-27°C',
@@ -28,7 +28,7 @@ const PetCare = () => {
       donts: 'Avoid toxic foods, overfeeding, neglecting exercise, skipping vet visits, leaving alone for long periods',
     },
     {
-      image: "https://example.com/german-shepherd.jpg",
+      image: "https://examphttps://images.unsplash.com/photo-1583676271414-526884f52529?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjR8fGdlcm1hbiUyMHNoZXBoZXJkJTIwZG9nfGVufDB8fDB8fHwwle.com/german-shepherd.jpg",
       name: 'German Shepherd',
       exercise: '1-2 hours of daily activities like running, hiking, or agility training',
       temperature: '10-25°C',
@@ -36,7 +36,7 @@ const PetCare = () => {
       donts: 'Avoid toxic foods, overfeeding, skipping exercise, neglecting training, isolation for long periods',
     },
     {
-      image: "https://example.com/pug.jpg",
+      image: "https://exhttps://images.unsplash.com/photo-1530041686259-53d26f863313?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHB1Z3xlbnwwfHwwfHx8MA%3D%3Dample.com/pug.jpg",
       name: 'Pug',
       exercise: '30 minutes to 1 hour of light exercise daily',
       temperature: '15-23°C',
@@ -44,7 +44,7 @@ const PetCare = () => {
       donts: 'Avoid overfeeding, overexercising (especially in heat), neglecting grooming, leaving alone for long periods',
     },
     {
-      image: "https://example.com/beagle.jpg",
+      image: "https://https://images.unsplash.com/photo-1657206456367-13c944a3379e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzZ8fGJlYWdsZXxlbnwwfHwwfHx8MA%3D%3Dexample.com/beagle.jpg",
       name: 'Beagle',
       exercise: '1-2 hours of daily exercise including walks, running, and scent games',
       temperature: '10-26°C',
@@ -52,7 +52,7 @@ const PetCare = () => {
       donts: 'Avoid overfeeding, skipping exercise, ignoring their scent drive, leaving alone for extended periods',
     },
     {
-      image: "https://example.com/shih-tzu.jpg",
+      image: "https://examhttps://images.unsplash.com/photo-1629755590546-f95805384911?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHNoaWglMjB0enV8ZW58MHx8MHx8fDA%3Dple.com/shih-tzu.jpg",
       name: 'Shih Tzu',
       exercise: '30 minutes to 1 hour of light exercise daily',
       temperature: '15-23°C',
@@ -60,7 +60,7 @@ const PetCare = () => {
       donts: 'Avoid overfeeding, overexercising, neglecting grooming, leaving alone for long periods',
     },
     {
-      image: "https://example.com/rottweiler.jpg",
+      image: "https://ehttps://images.unsplash.com/photo-1644563320037-71630d8515b0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDZ8fHJvdHR3ZWlsZXJ8ZW58MHx8MHx8fDA%3Dxample.com/rottweiler.jpg",
       name: 'Rottweiler',
       exercise: '1-2 hours of daily exercise including walks, running, and obedience training',
       temperature: '10-25°C',
@@ -68,7 +68,7 @@ const PetCare = () => {
       donts: 'Avoid harsh training, overfeeding, skipping exercise, neglecting socialization, isolation for long periods',
     },
     {
-      image: "https://example.com/indian-cat.jpg",
+      image: "https://example.comhttps://plus.unsplash.com/premium_photo-1677545182067-26ac518ef64f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDV8fGluZGlhbiUyMGNhdHxlbnwwfDB8MHx8fDA%3D/indian-cat.jpg",
       name: 'Indian Billi (Indigenous Cat)',
       exercise: '30 minutes to 1 hour of playtime daily',
       temperature: '18-30°C',
@@ -76,7 +76,7 @@ const PetCare = () => {
       donts: 'Avoid toxic foods, overfeeding, declawing, ignoring need for independence, skipping vet visits',
     },
     {
-      image: "https://example.com/persian-cat.jpg",
+      image: "https://example.comhttps://images.unsplash.com/photo-1654454320614-d8c5b4902a91?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mzh8fHBlcnNpYW4lMjBjYXR8ZW58MHwwfDB8fHww/persian-cat.jpg",
       name: 'Persian Cat',
       exercise: '20-30 minutes of gentle play daily',
       temperature: '18-25°C',
@@ -84,7 +84,7 @@ const PetCare = () => {
       donts: 'Avoid overfeeding, skipping grooming, overheating, neglecting vet visits',
     },
     {
-      image: "https://example.com/himalayan-cat.jpg",
+      image: "https://exahttps://plus.unsplash.com/premium_photo-1667566994072-399f46a79597?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDF8fGhpbWFseWFuJTIwY2F0fGVufDB8MHwwfHx8MA%3D%3Dmple.com/himalayan-cat.jpg",
       name: 'Himalayan Cat',
       exercise: '20-30 minutes of daily play',
       temperature: '18-24°C',
@@ -92,7 +92,7 @@ const PetCare = () => {
       donts: 'Avoid overfeeding, skipping grooming, overheating, leaving alone for long periods',
     },
     {
-      image: "https://example.com/bengal-cat.jpg",
+      image: "https://examplehttps://images.unsplash.com/photo-1603277160434-df7471138363?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmVuZ2FsJTIwY2F0fGVufDB8MHwwfHx8MA%3D%3D.com/bengal-cat.jpg",
       name: 'Bengal Cat',
       exercise: '1-2 hours of exercise daily',
       temperature: '15-26°C',
@@ -100,15 +100,7 @@ const PetCare = () => {
       donts: 'Avoid neglecting exercise, overfeeding, leaving alone for long periods, skipping vet visits',
     },
     {
-      image: "https://example.com/siamese-cat.jpg",
-      name: 'Siamese Cat',
-      exercise: '30 minutes to 1 hour of daily exercise',
-      temperature: '18-27°C',
-      dos: 'Socialization, mental stimulation, balanced diet, weekly grooming, regular interaction',
-      donts: 'Avoid overfeeding, neglecting exercise, ignoring vocalizations, leaving alone for long periods',
-    },
-    {
-      image: "https://example.com/british-shorthair-cat.jpg",
+      image: "https://exhttps://images.unsplash.com/photo-1654849139234-d23080454085?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YnJpdGlzaCUyMHNob3J0aGFpciUyMGNhdHxlbnwwfDB8MHx8fDA%3Dample.com/british-shorthair-cat.jpg",
       name: 'British Shorthair Cat',
       exercise: '20-30 minutes of daily play',
       temperature: '15-25°C',
