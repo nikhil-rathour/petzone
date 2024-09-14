@@ -1,5 +1,5 @@
 import React from 'react';
-import LogOutBtn from '../Components/Header/LogOutBtn';
+import LogOutBtn from '../components/Header/LogOutBtn';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom'
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ID } from "appwrite";
-import Input from "../Components/Input";
+import Input from "../components/Input";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";

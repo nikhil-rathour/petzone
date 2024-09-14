@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { login as authLogin } from "../store/authSlice";
-import Input from "../Components/Input";
+import Input from "../components/Input";
 import { useForm } from "react-hook-form";
 import AuthService from "../appwrite/auth";
 import { FaPaw } from "react-icons/fa";
