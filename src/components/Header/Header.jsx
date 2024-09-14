@@ -33,7 +33,7 @@ function Header() {
   };
 
   return (
-    <header className="bg-gradient-to-r from-[#4F1787] to-[#EB3678] shadow-lg sticky top-0 z-50">
+    <header className="bg-gradient-to-r from-[#7A1CAC] to-[#2E073F] shadow-lg sticky top-0 z-50">
       <nav className="container mx-auto flex flex-wrap justify-between items-center py-2 px-4 lg:px-6">
         {/* Logo */}
         <div className="flex items-center mr-4">
@@ -91,7 +91,7 @@ function Header() {
 
       {/* Mobile Navigation */}
       {isOpen && (
-        <div className="lg:hidden bg-gradient-to-r from-[#4F1787] to-[#EB3678] absolute top-full left-0 right-0 shadow-lg">
+        <div className="lg:hidden bg-gradient-to-r from-[#7A1CAC] to-[#2E073F] absolute top-full left-0 right-0 shadow-lg">
           <div className="flex flex-col space-y-2 p-4">
             {nav.map((page) => (
               page.activeItem ? (
