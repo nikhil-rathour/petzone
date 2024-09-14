@@ -62,7 +62,7 @@ function SellPet() {
     setIsAdopt(isChecked);
     setValue("adopt", isChecked);
     if (isChecked) {
-      setValue("Price", "0");
+      setValue("Price", 0);
     }
   };
 
@@ -107,7 +107,7 @@ function SellPet() {
         medicalImage: file2 ? file2.$id : post?.medicalImage,
         sellerNumber: data.sellerNumber,
         location: data.location,
-        Price: data.adopt ? "0" : data.Price,
+        Price: data.adopt ? 0 : data.Price,
         status: "active",
         adopt: data.adopt,
         userId: userData.$id,
@@ -316,9 +316,9 @@ function SellPet() {
                 {...register("Price", { 
                   required: !isAdopt,
                   min: 0,
-                  valueAsNumber: true
+                  valueAsNumber: true,
+                  validate: (value) => value === 0
                 })}
-                
                 disabled={isAdopt}
                 className={`mt-2 border border-[#C499F3] rounded-lg shadow-sm focus:ring-2 focus:ring-[#7360DF] ${
                   isAdopt ? 'bg-gray-100' : ''
@@ -328,11 +328,10 @@ function SellPet() {
             <div className="flex items-center">
               <input
                 type="checkbox"
-                {...register("adopt")}
-                checked={isAdopt}
-                onChange={(e) =>{handleAdoptChange, console.log(e.target.checked
-
-                )}}
+                {...register("adopt", {
+                  required:isAdopt,
+                  onChange: (e) => {handleAdoptChange(e),console.log(e.target.checked)}
+                })}
                 className="mr-2 h-5 w-5 text-[#7360DF] border-[#C499F3] rounded focus:ring-2 focus:ring-[#7360DF]"
               />
               <label className="text-lg text-gray-700">Adopt</label>
