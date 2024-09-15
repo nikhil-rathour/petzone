@@ -1,8 +1,9 @@
 // src/Home.jsx
 import React, { useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import PostCard from '../Components/PostCard';
-import { useSelector } from 'react-redux';
+
+// import PostCard from '../components/PostCard';
+// import PostCard from '../Components/PostCard';
 import service from '../appwrite/config';
 import authService from '../appwrite/auth';
 import parse from 'html-react-parser';
