@@ -38,7 +38,7 @@ function Header() {
         {/* Logo */}
         <div className="flex items-center mr-4">
           <img
-            src="https://th.bing.com/th/id/OIG3.c1fFgoZdNOaPHm0Mrs7o?w=270&h=270&c=6&r=0&o=5&dpr=1.4&pid=ImgGn"
+            src="https://i.pinimg.com/736x/58/d0/de/58d0de7d47d69bacfe4eee34d984179d.jpg"
             alt="PetZone Logo"
             className="w-10 h-10 sm:w-12 sm:h-12 mr-2 rounded-full shadow-md"
           />
