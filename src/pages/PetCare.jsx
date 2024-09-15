@@ -34,14 +34,6 @@ const PetCard = ({ pet }) => {
 
 const petData = [
   {
-    image: "https://example.com/goldenhttps://images.unsplash.com/photo-1539692177343-b2b990faef15?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D-retriever.jpg",
-    name: 'Golden Retriever',
-    exercise: 'Daily walks and playtime',
-    temperature: '15-25°C',
-    dos: 'Regular grooming, social interaction',
-    donts: 'N/A',
-  },
-  {
     image: "https://https://unsplash.com/photos/shallow-focus-photography-siamese-cat-7qau-YIXn90example.com/siamese-cat.jpg",
     name: 'Siamese Cat',
     exercise: '30 minutes to 1 hour of interactive play daily',
