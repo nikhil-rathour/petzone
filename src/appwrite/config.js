@@ -208,7 +208,7 @@ export class Service {
     }
   }
 
-  async getStorys(queries = [Query.equal("status", "active")]) {
+  async getStories(queries = [Query.equal("status", "active")]) {
     try {
       return await this.databases.listDocuments(
         conf.appwriteDatabaseId,
@@ -216,7 +216,7 @@ export class Service {
         queries
       );
     } catch (error) {
-      console.log("Appwrite serive :: getStory :: error", error);
+      console.log("Appwrite serive :: getStories :: error", error);
       return false;
     }
   }

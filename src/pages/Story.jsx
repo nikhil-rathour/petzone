@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import service from '../appwrite/config'
-import { parse } from 'postcss'
+import { Query } from 'appwrite' // Add this import
+import parse from 'html-react-parser';
 
 function Story() {
   const [stories, setStories] = useState([])
@@ -14,7 +15,7 @@ function Story() {
 
   const fetchStories = async () => {
     try {
-      const response = await service.getStory([service.Query.equal("status", "active")])
+      const response = await service.getStories([Query.equal("status", "active")])
       if (response) {
         setStories(response.documents)
         console.log(response.documents)
@@ -32,7 +33,7 @@ function Story() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {stories.map((story) => (
           <Link to={`/storypost/${story.$id}`} key={story.$id} className="bg-white rounded-lg shadow-lg p-6 transition duration-300 ease-in-out hover:shadow-xl hover:scale-105">
-            <h2>{story.story}</h2>
+            <h2>{parse(story.story)}</h2>
           </Link>
         ))}
       </div>
