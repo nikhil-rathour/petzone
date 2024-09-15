@@ -66,7 +66,7 @@ const petData = [
     donts: 'Avoid overfeeding, overexercising (especially in heat), neglecting grooming, leaving alone for long periods',
   },
   {
-    image: "https://https://images.unsplash.com/photo-1657206456367-13c944a3379e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzZ8fGJlYWdsZXxlbnwwfHwwfHx8MA%3D%3Dexample.com/beagle.jpg",
+    image: "./img/beagle.jpg",
     name: 'Beagle',
     exercise: '1-2 hours of daily exercise including walks, running, and scent games',
     temperature: '10-26°C',

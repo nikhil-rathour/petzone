@@ -15,6 +15,7 @@ function Header() {
     { name: "Pet Care", slug: "/petcare",activeItem : true },
     { name: "Adopt", slug: "/adopt",activeItem : true },
     { name: "Help", slug: "/help",activeItem : true},
+    { name: "Story", slug: "/story",activeItem : true},
     {
       name : "About" , slug : "/aboutus", activeItem : true
     },
