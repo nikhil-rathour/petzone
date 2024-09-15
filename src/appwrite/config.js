@@ -220,7 +220,21 @@ export class Service {
       return false;
     }
   }
+
+  async deleteStory(storyId) {
+    try {
+      await this.databases.deleteDocument(
+        conf.appwriteDatabaseId,
+        conf.appwriteStoryCollectionId,
+        storyId
+      );
+      return true;
+    } catch (error) {
+      console.log("Appwrite service :: deleteStory :: error", error);
+      return false;
+    }
+  }
 }
 
 const service = new Service();
-export default service;
+export default service;
