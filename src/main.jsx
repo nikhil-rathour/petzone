@@ -20,7 +20,7 @@ import EditPost from './pages/EditPost.jsx'
 import MyPost from './pages/MyPost.jsx'
 import Story from './pages/Story.jsx'
 import StoryForm from './pages/storyform.jsx'
-import StoryPost from './pages/storyPost.jsx'
+import StoryPost from './pages/StoryPost.jsx'
 
 const router = createBrowserRouter([
   {
