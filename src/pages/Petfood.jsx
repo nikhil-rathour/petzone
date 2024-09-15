@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const PetFood = () => {
   const [selectedPet, setSelectedPet] = useState("All");
@@ -9,32 +10,65 @@ const PetFood = () => {
     {
       id: 1,
       photo:
-        "https://static.vecteezy.com/system/resources/previews/004/141/669/non_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg",
-      name: "Organic Dog Food",
+        "https://www.pedigree.com/sites/g/files/fnmzdf3076/files/migrate-product-files/images/zetfvv404nb8otnhreya.png",
+      name: "PEDIGREE Dry Dog Food Adult Grilled Steak & Vegetable Flavor",
       petType: "Dog",
       breed: "Labrador",
       description: "High-quality organic dog food for Labradors.",
-      price: "599",
+      price: "899",
+      Link : "https://www.pedigree.com/where-to-buy?mikmak-sku=023100116341"
+    },
+    {
+      id: 4,
+      photo:
+        "https://www.pedigree.com/sites/g/files/fnmzdf3076/files/migrate-product-files/images/uo3f3l4kosbckx0hx8hn.png",
+      name: "PEDIGREE CANINE COOKOUTS Chicken Flavored Meaty Strips",
+      petType: "Dog",
+      breed: "Beagle",
+      description: "High-quality organic dog food for Labradors.",
+      price: "899",
+      Link : "https://www.pedigree.com/where-to-buy?mikmak-sku=023100149288"
     },
     {
       id: 2,
-      photo:
-        "https://static.vecteezy.com/system/resources/previews/004/141/669/non_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg",
-      name: "Grain-Free Cat Food",
+      photo:"https://www.petsy.online/cdn/shop/products/613hZE6fSqL._SL1500_295x295.jpg?v=1656925893",
+      name: "Purepet Dry Cat Food - Tuna and Salmon",
       petType: "Cat",
       breed: "Siamese",
       description: "Grain-free cat food for Siamese cats.",
       price: "999",
+      Link : "https://www.petsy.online/products/purepet-dry-cat-food-tuna-and-salmon"
     },
     {
       id: 3,
       photo:
-        "https://static.vecteezy.com/system/resources/previews/004/141/669/non_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg",
-      name: "Puppy Chow",
+        "https://www.pedigree.com/sites/g/files/fnmzdf3076/files/migrate-product-files/images/xzdrpkhcshtzisb27cwq.png",
+      name: "PEDIGREE DENTASTIX Bacon Flavor Toy/Small Dog Treats",
       petType: "Dog",
-      breed: "Labrador",
+      breed: "Shih Tzu",
       description: "Special formula for Labrador puppies.",
-      price: "999",
+      price: "699",
+      Link : "https://www.pedigree.com/where-to-buy?mikmak-sku=023100140322"
+    },
+    {
+      id: 5,
+      photo:"https://www.petsy.online/cdn/shop/files/PersianAdult-10_295x295.png?v=1717584822",
+      name: "Royal Canin Persian Adult Breed Dry Cat Food",
+      petType: "Cat",
+      breed: "British Shorthair",
+      description: "Grain-free cat food for British Shorthair cats.",
+      price: "2184",
+      Link : "https://www.petsy.online/products/purepet-dry-cat-food-tuna-and-salmon"
+    },
+    {
+      id: 6,
+      photo:"https://www.petsy.online/cdn/shop/products/2_e9f2dd7b-7aa6-4daa-930d-c35d3db7a7fa_295x295.jpg?v=1667387570",
+      name: "Whiskas Adult Wet Cat Food - Ocean Fish ",
+      petType: "Cat",
+      breed: "Himalayan",
+      description: "Grain-free cat food for himalayan cats.",
+      price: "1218",
+      Link : "https://www.petsy.online/products/whiskas-adult-1-year-wet-cat-food-ocean-fish-80g-x-24-pouches"
     },
   ];
 
@@ -141,7 +175,8 @@ const PetFood = () => {
                     <span className="text-lg font-semibold text-[#7360DF]">₹{food.price}</span>
                   </div>
                   <button className="w-full bg-[#7360DF] text-white py-2 px-4 rounded-md hover:bg-opacity-90 transition-colors duration-300">
-                    Add to Cart
+                    <Link to={food.Link}>Add to Cart </Link>
+                    
                   </button>
                 </div>
               </div>
