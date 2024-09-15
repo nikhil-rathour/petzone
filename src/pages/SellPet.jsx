@@ -157,219 +157,206 @@ function SellPet() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#C499F3] via-[#F2AFEF] to-[#7360DF] p-6">
-      <div className="max-w-4xl mx-auto bg-white shadow-xl rounded-lg p-6">
-        <h2 className="text-3xl font-bold text-center text-[#7360DF] mb-8">
-          {post ? "Update Your Pet Listing" : "Sell Your Pet"}
-        </h2>
-        <form onSubmit={handleSubmit(submit)} className="space-y-6">
-          {/* Type Dropdown */}
-          <div className="flex flex-col mb-4">
-            <label className="text-lg font-semibold text-gray-700">
-              Pet Type
-            </label>
-            <select
-              {...register("type", { required: true })}
-              onChange={(e) => {
-                setType(e.target.value);
-                setValue("type", e.target.value);
-                setValue("breed", "");
-              }}
-              className="mt-2 border border-[#C499F3] rounded-lg shadow-sm focus:ring-2 focus:ring-[#7360DF] w-full px-4 py-2"
-            >
-              {Object.keys(petOptions).map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          {/* Breed Dropdown */}
-          <div className="flex flex-col mb-4">
-            <label className="text-lg font-semibold text-gray-700">Breed</label>
-            <select
-              {...register("breed", { required: true })}
-              className="mt-2 border border-[#C499F3] rounded-lg shadow-sm focus:ring-2 focus:ring-[#7360DF] w-full px-4 py-2"
-            >
-              <option value="">Select a breed</option>
-              {breeds.map((breed) => (
-                <option key={breed} value={breed}>
-                  {breed}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          {/* Location Dropdown */}
-          <div className="flex flex-col mb-4">
-            <label className="text-lg font-semibold text-gray-700">
-              Location
-            </label>
-            <select
-              {...register("location", { required: true })}
-              className="mt-2 border border-[#C499F3] rounded-lg shadow-sm focus:ring-2 focus:ring-[#7360DF] w-full px-4 py-2"
-            >
-              <option value="">Select a location</option>
-              {locationOptions.map((location) => (
-                <option key={location} value={location}>
-                  {location}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          {/* Age Input */}
-          <div className="flex flex-col mb-4">
-            <label className="text-lg font-semibold text-gray-700">
-              Age (in weeks)
-            </label>
-            <Input
-              type="number"
-              {...register("age", { 
-                required: true,
-                valueAsNumber: true,
-                validate: (value) => Number.isInteger(value) && value > 0
-              })}
-              min="1"
-              step="1"
-              className="mt-2 border border-[#C499F3] rounded-lg shadow-sm focus:ring-2 focus:ring-[#7360DF]"
-            />
-          </div>
-
-          {/* Contact Number Input */}
-          <div className="flex flex-col mb-4">
-            <label className="text-lg font-semibold text-gray-700">
-              Contact Number
-            </label>
-            <Input
-              type="tel"
-              {...register("sellerNumber", { required: true })}
-              maxLength="10"
-              pattern="\d{10}"
-              className="mt-2 border border-[#C499F3] rounded-lg shadow-sm focus:ring-2 focus:ring-[#7360DF]"
-            />
-          </div>
-
-          {/* Gender Dropdown */}
-          <div className="flex flex-col mb-4">
-            <label className="text-lg font-semibold text-gray-700">Gender</label>
-            <select
-              {...register("gender", { required: true })}
-              className="mt-2 border border-[#C499F3] rounded-lg shadow-sm focus:ring-2 focus:ring-[#7360DF] w-full px-4 py-2"
-            >
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-            </select>
-          </div>
-
-          {/* Pet Image Input */}
-          <div className="flex flex-col mb-4">
-            <label className="text-lg font-semibold text-gray-700">
-              Pet Image
-            </label>
-            <Input
-              type="file"
-              accept="image/png, image/jpg, image/jpeg, image/gif"
-              {...register("image1", { required: !post })}
-              className="mt-2 border border-[#C499F3] rounded-lg"
-            />
-            {post?.petImage && (
-              <div className="mt-2">
-                <img
-                  src={service.getFilePreview(post.petImage)}
-                  alt="Pet Image"
-                  className="w-full h-auto rounded-lg shadow-sm"
-                />
-              </div>
-            )}
-          </div>
-
-          {/* Vaccination Image Input */}
-          <div className="flex flex-col mb-4">
-            <label className="text-lg font-semibold text-gray-700">
-              Vaccination Image
-            </label>
-            <Input
-              type="file"
-              accept="image/png, image/jpg, image/jpeg, image/gif"
-              {...register("image2", { required: !post })}
-              className="mt-2 border border-[#C499F3] rounded-lg"
-            />
-            {post?.medicalImage && (
-              <div className="mt-2">
-                <img
-                  src={service.getFilePreview(post.medicalImage)}
-                  alt="Vaccination Image"
-                  className="w-full h-auto rounded-lg shadow-sm"
-                />
-              </div>
-            )}
-          </div>
-
-          {/* Price and Adopt Checkbox */}
-          <div className="flex items-center space-x-4 mb-4">
-            <div className="flex flex-col w-full">
-              <label className="text-lg font-semibold text-gray-700">Price</label>
-              <Input
-                type="number"
-                {...register("Price", { 
-                  required: !isAdopt,
-                  min: 0,
-                  valueAsNumber: true,
-                  validate: (value) => value === 0
-                })}
-                disabled={isAdopt}
-                className={`mt-2 border border-[#C499F3] rounded-lg shadow-sm focus:ring-2 focus:ring-[#7360DF] ${
-                  isAdopt ? 'bg-gray-100' : ''
-                }`}
-              />
-            </div>
-            <div className="flex items-center">
-              <input
-                type="checkbox"
-                {...register("adopt", {
-                  required:isAdopt,
-                  onChange: (e) => {handleAdoptChange(e),console.log(e.target.checked)}
-                })}
-                className="mr-2 h-5 w-5 text-[#7360DF] border-[#C499F3] rounded focus:ring-2 focus:ring-[#7360DF]"
-              />
-              <label className="text-lg text-gray-700">Adopt</label>
-            </div>
-          </div>
-
-          {/* Status Dropdown (hidden) */}
-          <div className="hidden flex-col mb-6">
-            <label className="text-lg font-semibold text-gray-700">Status</label>
-            <select
-              {...register("status", { required: true })}
-              className="mt-2 border border-[#C499F3] rounded-lg shadow-sm focus:ring-2 focus:ring-[#7360DF] w-full px-4 py-2"
-            >
-              <option value="active">Active</option>
-              <option value="inactive">Inactive</option>
-            </select>
-          </div>
-
-          {/* Submit Button */}
-          <button
-            type="submit"
-            disabled={isLoading}
-            className="w-full bg-[#7360DF] text-white py-3 rounded-lg font-semibold shadow-md hover:bg-opacity-90 focus:outline-none focus:ring-4 focus:ring-[#C499F3] transition disabled:opacity-50"
-          >
-            {isLoading ? "Processing..." : (post ? "Update" : "Submit")}
-          </button>
-        </form>
-
-        {/* Loading Overlay */}
-        {isLoading && (
-          <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center">
-            <div className="bg-white p-8 rounded-lg shadow-xl flex flex-col items-center">
-              <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-[#7360DF]"></div>
-              <p className="mt-4 text-lg font-semibold text-[#7360DF]">Processing your request...</p>
-            </div>
-          </div>
-        )}
+    <div className="min-h-screen bg-gradient-to-br from-[#AD49E1] to-[#EBD3F8]">
+      {/* Header */}
+      <div className="relative w-full overflow-hidden h-80 md:h-96 lg:h-[28rem]">
+        <img
+          src="https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+          alt="Sell Pet Banner"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white text-center px-4">
+            {post ? "Update Your Pet Listing" : "Find a New Home for Your Pet"}
+          </h1>
+        </div>
       </div>
+
+      {/* Main Content */}
+      <div className="container mx-auto px-6 py-12">
+        <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-8">
+          <h2 className="text-3xl font-bold mb-8 text-[#7360DF] text-center">
+            {post ? "Update Your Pet Listing" : "Sell Your Pet"}
+          </h2>
+          <form onSubmit={handleSubmit(submit)} className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Type Dropdown */}
+              <div className="flex flex-col">
+                <label className="text-lg font-semibold text-gray-700 mb-2">Pet Type</label>
+                <select
+                  {...register("type", { required: true })}
+                  onChange={(e) => {
+                    setType(e.target.value);
+                    setValue("type", e.target.value);
+                    setValue("breed", "");
+                  }}
+                  className="form-select rounded-lg border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                >
+                  {Object.keys(petOptions).map((option) => (
+                    <option key={option} value={option}>{option}</option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Breed Dropdown */}
+              <div className="flex flex-col">
+                <label className="text-lg font-semibold text-gray-700 mb-2">Breed</label>
+                <select
+                  {...register("breed", { required: true })}
+                  className="form-select rounded-lg border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                >
+                  <option value="">Select a breed</option>
+                  {breeds.map((breed) => (
+                    <option key={breed} value={breed}>{breed}</option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Location Dropdown */}
+              <div className="flex flex-col">
+                <label className="text-lg font-semibold text-gray-700 mb-2">Location</label>
+                <select
+                  {...register("location", { required: true })}
+                  className="form-select rounded-lg border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                >
+                  <option value="">Select a location</option>
+                  {locationOptions.map((location) => (
+                    <option key={location} value={location}>{location}</option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Age Input */}
+              <div className="flex flex-col">
+                <label className="text-lg font-semibold text-gray-700 mb-2">Age (in weeks)</label>
+                <Input
+                  type="number"
+                  {...register("age", { 
+                    required: true,
+                    valueAsNumber: true,
+                    validate: (value) => Number.isInteger(value) && value > 0
+                  })}
+                  min="1"
+                  step="1"
+                  className="form-input rounded-lg border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                />
+              </div>
+
+              {/* Contact Number Input */}
+              <div className="flex flex-col">
+                <label className="text-lg font-semibold text-gray-700 mb-2">Contact Number</label>
+                <Input
+                  type="tel"
+                  {...register("sellerNumber", { required: true })}
+                  maxLength="10"
+                  pattern="\d{10}"
+                  className="form-input rounded-lg border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                />
+              </div>
+
+              {/* Gender Dropdown */}
+              <div className="flex flex-col">
+                <label className="text-lg font-semibold text-gray-700 mb-2">Gender</label>
+                <select
+                  {...register("gender", { required: true })}
+                  className="form-select rounded-lg border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                >
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+              </div>
+            </div>
+
+            {/* Image Inputs */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Pet Image Input */}
+              <div className="flex flex-col">
+                <label className="text-lg font-semibold text-gray-700 mb-2">Pet Image</label>
+                <Input
+                  type="file"
+                  accept="image/png, image/jpg, image/jpeg, image/gif"
+                  {...register("image1", { required: !post })}
+                  className="form-input rounded-lg border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                />
+                {post?.petImage && (
+                  <img
+                    src={service.getFilePreview(post.petImage)}
+                    alt="Pet Image"
+                    className="mt-2 w-full h-auto rounded-lg shadow-sm"
+                  />
+                )}
+              </div>
+
+              {/* Vaccination Image Input */}
+              <div className="flex flex-col">
+                <label className="text-lg font-semibold text-gray-700 mb-2">Vaccination Image</label>
+                <Input
+                  type="file"
+                  accept="image/png, image/jpg, image/jpeg, image/gif"
+                  {...register("image2", { required: !post })}
+                  className="form-input rounded-lg border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                />
+                {post?.medicalImage && (
+                  <img
+                    src={service.getFilePreview(post.medicalImage)}
+                    alt="Vaccination Image"
+                    className="mt-2 w-full h-auto rounded-lg shadow-sm"
+                  />
+                )}
+              </div>
+            </div>
+
+            {/* Price and Adopt Checkbox */}
+            <div className="flex items-center space-x-4">
+              <div className="flex-1">
+                <label className="text-lg font-semibold text-gray-700 mb-2">Price</label>
+                <Input
+                  type="number"
+                  {...register("Price", { 
+                    required: !isAdopt,
+                    min: 0,
+                    valueAsNumber: true,
+                    validate: (value) => !isAdopt || value === 0
+                  })}
+                  disabled={isAdopt}
+                  className={`form-input rounded-lg border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 ${
+                    isAdopt ? 'bg-gray-100' : ''
+                  }`}
+                />
+              </div>
+              <div className="flex items-center">
+                <input
+                  type="checkbox"
+                  {...register("adopt", {
+                    onChange: handleAdoptChange
+                  })}
+                  className="form-checkbox h-5 w-5 text-indigo-600 rounded focus:ring-indigo-500 border-gray-300"
+                />
+                <label className="ml-2 text-lg text-gray-700">Adopt</label>
+              </div>
+            </div>
+
+            {/* Submit Button */}
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="w-full bg-[#7360DF] text-white py-3 rounded-md font-semibold shadow-md hover:bg-opacity-90 transition-colors duration-300 focus:outline-none focus:ring-4 focus:ring-[#C499F3] disabled:opacity-50"
+            >
+              {isLoading ? "Processing..." : (post ? "Update Listing" : "Create Listing")}
+            </button>
+          </form>
+        </div>
+      </div>
+
+      {/* Loading Overlay */}
+      {isLoading && (
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center z-50">
+          <div className="bg-white p-8 rounded-lg shadow-xl flex flex-col items-center">
+            <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-[#7360DF]"></div>
+            <p className="mt-4 text-lg font-semibold text-[#7360DF]">Processing your request...</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
