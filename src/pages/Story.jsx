@@ -36,7 +36,7 @@ function Story() {
           {stories.map((story) => (
             <Link to={`/storypost/${story.$id}`} key={story.$id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1">
               <div className="p-6">
-                <h2 className="text-xl font-semibold mb-4 text-gray-800">{parse(story.title || 'Untitled Story')}</h2>
+         
                 <p className="text-gray-600 mb-4 line-clamp-3">{parse(story.story)}</p>
                 <div className="text-[#AD49E1] font-medium">Read more</div>
               </div>
