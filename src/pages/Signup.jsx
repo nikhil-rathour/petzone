@@ -74,6 +74,17 @@ function Signup() {
               {...register("password", { required: true })}
               className="bg-gray-50 text-gray-800 border focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition duration-200"
             />
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                id="terms"
+                {...register("terms", { required: true })}
+                className="mr-2 focus:ring-purple-500 h-4 w-4 text-purple-600 border-gray-300 rounded"
+              />
+              <label htmlFor="terms" className="text-sm text-gray-600">
+                I agree to the <a href="#" className="text-purple-600 hover:underline">Terms and Conditions</a>, including taking proper measurements before buying a pet.
+              </label>
+            </div>
             <button
               type="submit"
               disabled={isLoading}
