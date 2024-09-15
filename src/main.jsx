@@ -20,6 +20,7 @@ import EditPost from './pages/EditPost.jsx'
 import MyPost from './pages/MyPost.jsx'
 import Story from './pages/Story.jsx'
 import StoryForm from './pages/storyform.jsx'
+import StoryPost from './pages/storyPost.jsx'
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
         {
           path: "/storyform",
           element: <StoryForm/>,
+        },
+        {
+          path: "/storypost/:id",
+          element: <StoryPost/>,
         },
         {
           path: "/sell",

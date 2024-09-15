@@ -105,6 +105,10 @@ export class Service {
     }
   }
 
+ 
+  
+  
+
   async deletePost(slug) {
     try {
       await this.databases.deleteDocument(
@@ -172,6 +176,49 @@ export class Service {
 
   getFilePreview(fileId) {
     return this.bucket.getFilePreview(conf.appwriteBucketId, fileId);
+  }
+
+  async createStory({userId,story,status}){
+    try {
+      return await this.databases.createDocument(
+        conf.appwriteDatabaseId,
+        conf.appwriteStoryCollectionId,
+        ID.unique(),
+        {
+          userId,
+          story,
+          status,
+        }
+      )
+    } catch (error) {
+      console.log("Appwrite service :: createStory :: error", error);
+      throw error; // Propagate the error
+    }
+  }
+  async getStory(slug) {
+    try {
+      return await this.databases.getDocument(
+        conf.appwriteDatabaseId,
+        conf.appwriteStoryCollectionId,
+        slug
+      );
+    } catch (error) {
+      console.log("Appwrite serive :: getStory :: error", error);
+      return false;
+    }
+  }
+
+  async getStorys(queries = [Query.equal("status", "active")]) {
+    try {
+      return await this.databases.listDocuments(
+        conf.appwriteDatabaseId,
+        conf.appwriteStoryCollectionId,
+        queries
+      );
+    } catch (error) {
+      console.log("Appwrite serive :: getStory :: error", error);
+      return false;
+    }
   }
 }
 
