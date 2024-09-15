@@ -88,9 +88,9 @@ const router = createBrowserRouter([
       {
         path : "/help",
         element: (
-          <Protected >
+          
             <Help/>
-          </Protected>
+        
         ),
       },
       {
