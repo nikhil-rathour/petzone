@@ -46,7 +46,7 @@ const Help = () => {
       name: 'Maa Animal Foundation',
       location: 'Gandhinagar',
       contact: '9712577277',
-      description: 'Supporting pet adoption and providing pet care resources in San Francisco.',
+      description: 'Supporting pet adoption and providing pet care resources in Gandhinagar.',
       photo: 'https://lh5.googleusercontent.com/p/AF1QipPrwwPts7h8F2JbarGD-aqy8qyT6WSraxb5HiW9=w408-h725-k-no',
       mapLink: 'https://maps.app.goo.gl/8dyPD7tR3VQMfpjK6',
     },
