@@ -20,13 +20,10 @@ const PetCard = ({ pet }) => {
           <p className="text-sm text-gray-600 mb-2">
             <span className="font-medium text-[#7360DF]">Do's:</span> {pet.dos}
           </p>
-          <p className="text-sm text-gray-600 mb-4">
+          <p className="text-sm text-gray-600">
             <span className="font-medium text-[#7360DF]">Don'ts:</span> {pet.donts || "N/A"}
           </p>
         </div>
-        <button className="w-full bg-[#7360DF] text-white py-2 px-4 rounded-md hover:bg-[#5240B0] transition-colors duration-300 mt-auto">
-          Learn More
-        </button>
       </div>
     </div>
   );
