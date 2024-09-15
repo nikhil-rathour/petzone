@@ -79,7 +79,7 @@ const Home = () => {
 
   const filteredPosts = posts.filter((post) => {
     const matchesPet = post.type === selectedPet;
-    const matchesBreed = selectedBreed === 'All' || post.breed === selectedBreed;
+    const matchesBreed = selectedBreed === 'All' || post.breed.toLowerCase() === selectedBreed.toLowerCase();
     const matchesGender = selectedGender === 'All' || post.gender === selectedGender;
     const matchesLocation = selectedLocation === 'All' || post.location === selectedLocation;
     return matchesPet && matchesBreed && matchesGender && matchesLocation;
@@ -163,7 +163,7 @@ const Home = () => {
               >
                 <option value="All">All</option>
                 {breeds.map((breed) => (
-                  <option key={breed} value={breed}>{breed}</option>
+                  <option key={breed} value={breed.toLowerCase()}>{breed}</option>
                 ))}
               </select>
             </div>
