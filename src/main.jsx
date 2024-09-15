@@ -20,8 +20,8 @@ import EditPost from './pages/EditPost.jsx'
 import MyPost from './pages/MyPost.jsx'
 import Story from './pages/Story.jsx'
 import StoryForm from './pages/storyform.jsx'
-import StoryPost from './pages/StoryPost.jsx'
-
+import StoryPost from './pages/storyPost.jsx'
+import TermsAndConditions from './pages/TermsAndConditions.jsx'
 const router = createBrowserRouter([
   {
     path: "/",
@@ -34,6 +34,10 @@ const router = createBrowserRouter([
         {
           path: "/story",
           element: <Story/>,
+        },
+        {
+          path: "/terms",
+          element: <TermsAndConditions/>,
         },
         {
           path: "/storyform",

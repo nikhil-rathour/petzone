@@ -82,7 +82,8 @@ function Signup() {
                 className="mr-2 focus:ring-purple-500 h-4 w-4 text-purple-600 border-gray-300 rounded"
               />
               <label htmlFor="terms" className="text-sm text-gray-600">
-                I agree to the <a href="#" className="text-purple-600 hover:underline">Terms and Conditions</a>, including taking proper measurements before buying a pet.
+                I agree to the <Link
+                 to="/terms" className="text-purple-600 hover:underline">Terms and Conditions</Link>, including taking proper measurements before buying a pet.
               </label>
             </div>
             <button
