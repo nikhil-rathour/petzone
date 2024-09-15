@@ -25,7 +25,7 @@ const PetFood = () => {
       name: "PEDIGREE CANINE COOKOUTS Chicken Flavored Meaty Strips",
       petType: "Dog",
       breed: "Beagle",
-      description: "High-quality organic dog food for Labradors.",
+      description: "High-quality organic dog food for Beagles.",
       price: "899",
       Link : "https://www.pedigree.com/where-to-buy?mikmak-sku=023100149288"
     },
@@ -46,7 +46,7 @@ const PetFood = () => {
       name: "PEDIGREE DENTASTIX Bacon Flavor Toy/Small Dog Treats",
       petType: "Dog",
       breed: "Shih Tzu",
-      description: "Special formula for Labrador puppies.",
+      description: "Special formula for Shih Tzu puppies.",
       price: "699",
       Link : "https://www.pedigree.com/where-to-buy?mikmak-sku=023100140322"
     },
