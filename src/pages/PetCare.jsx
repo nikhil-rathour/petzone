@@ -55,7 +55,7 @@ const petData = [
     donts: 'Avoid toxic foods, overfeeding, skipping exercise, neglecting training, isolation for long periods',
   },
   {
-    image: "https://imgs.search.brave.com/Z9BG6doUmEQhcCPlt14s9uJeUneKRqRLYwB6p9vlSLI/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/Y3JlYXRlLnZpc3Rh/LmNvbS9hcGkvbWVk/aWEvc21hbGwvMTcz/NDgyNzM4L3N0b2Nr/LXBob3RvLXB1Zw.jpeg",
+    image: "https://imgs.search.brave.com/NwSYrs8nDgBVUX4yLFTOLtjnihEotRSRFPq1k7zkEx8/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTQ0/NzYwOTI4NS9waG90/by9jdXRlLXB1Zy1h/dC1ob21lLmpwZz9z/PTYxMng2MTImdz0w/Jms9MjAmYz1JbFh2/M1ZWT2lBdUN2MGct/Unk2N3FaT1d3dzdY/Y0Z0ZjJSNEhjclNN/ODFnPQ",
     name: 'Pug',
     exercise: '30 minutes to 1 hour of light exercise daily',
     temperature: '15-23°C',
@@ -144,7 +144,7 @@ const PetCare = () => {
     ? updatedPetData 
     : updatedPetData.filter(pet => {
         if (selectedPetType === "Dog") {
-          return ["Golden Retriever", "Labrador", "German Shepherd", "Pug", "Beagle", "Rottweiler"].includes(pet.name);
+          return ["Golden Retriever", "Labrador", "German Shepherd", "Pug", "Beagle", "Rottweiler", "Shih Tzu"].includes(pet.name);
         } else if (selectedPetType === "Cat") {
           return ["Siamese Cat", "Indian Billi (Indigenous Cat)", "Persian Cat", "Himalayan Cat", "Bengal Cat", "British Shorthair Cat"].includes(pet.name);
         }
