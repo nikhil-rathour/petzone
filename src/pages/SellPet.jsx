@@ -8,7 +8,7 @@ import service from "../appwrite/config";
 function SellPet() {
   const { slug } = useParams();
   const [post, setPost] = useState(null);
-  const { register, handleSubmit, watch, setValue, getValues } = useForm();
+  const { register, handleSubmit, setValue } = useForm();
 
   const navigate = useNavigate();
   const userData = useSelector((state) => state.auth.userData);

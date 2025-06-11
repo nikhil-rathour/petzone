@@ -1,5 +1,5 @@
 // src/Home.jsx
-import React, { useState,useEffect } from 'react';
+import  { useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 // import PostCard from '../components/PostCard';
@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import service from '../appwrite/config';
 import authService from '../appwrite/auth';
 import parse from 'html-react-parser';
+import conf from '../conf/conf';
 
 const Home = () => {
   const [selectedPet, setSelectedPet] = useState('Dog');
@@ -214,7 +215,7 @@ const Home = () => {
                   className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1"
                 >
                   <img
-                    src={service.getFilePreview(post.petImage)}
+                    src={`https://fra.cloud.appwrite.io/v1/storage/buckets/${conf.appwriteBucketId}/files/${post.petImage}/view?project=${conf.appwriteProjectId}&mode=admin`}
                     alt={post.breed}
                     className="w-full h-64 object-cover"
                   />

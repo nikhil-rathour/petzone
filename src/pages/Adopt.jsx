@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import service from '../appwrite/config';
 import parse from 'html-react-parser';
+import conf from "../conf/conf";
 
 const Adopt = () => {
   const [posts, setPosts] = useState([]);
@@ -60,7 +61,7 @@ const Adopt = () => {
                 className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1"
               >
                 <img
-                  src={service.getFilePreview(pet.petImage)}
+                 src={`https://fra.cloud.appwrite.io/v1/storage/buckets/${conf.appwriteBucketId}/files/${pet.petImage}/view?project=${conf.appwriteProjectId}&mode=admin`}
                   alt={pet.breed}
                   className="w-full h-64 object-cover"
                 />
