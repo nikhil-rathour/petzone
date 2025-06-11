@@ -20,15 +20,22 @@ const ProfilePage = () => {
         <div className="md:flex">
           <div className="md:w-1/3 bg-gradient-to-b from-[#7360DF] to-[#C499F3] p-6 text-white">
             <div className="text-center">
-              <div className="relative inline-block">
-                <img
-                  className="w-40 h-40 rounded-full border-4 border-white mx-auto mb-4 shadow-lg transition-transform duration-300 hover:scale-105"
+           <div className="relative inline-block  ">
+                {/* <img
+                  className="  w-40 h-40 rounded-full border-4 border-white mx-auto mb-4 shadow-lg transition-transform duration-300 hover:scale-105 text-white font-bold text-8xl  "
                   src={userData.avatar || "https://via.placeholder.com/160"}
-                  alt="Profile"
-                />
-                <button className="absolute bottom-4 right-0 bg-white text-[#7360DF] rounded-full p-2 shadow-md hover:bg-[#7360DF] hover:text-white transition duration-300">
+                  alt= {userData.name.split(' ').map(n => n[0]).join('')}
+                  
+                /> */}
+                {/* <button className="absolute bottom-4 right-0 bg-white text-[#7360DF] rounded-full p-2 shadow-md hover:bg-[#7360DF] hover:text-white transition duration-300">
                   <FaEdit />
-                </button>
+                </button> */}
+
+                 <div className="w-40 h-40 bg-gradient-to-br from-[#AD49E1] to-[#7360DF] rounded-full mx-auto mb-4 flex items-center justify-center">
+                  <span className="text-white font-bold text-8xl mb-3">
+                    {userData.name.split(' ').map(n => n[0]).join('')}
+                  </span>
+                </div>
               </div>
               <h2 className="text-3xl font-bold mb-2">{userData.name}</h2>
               <p className="text-sm opacity-75 mb-4">{userData.email}</p>

@@ -13,28 +13,35 @@ const AboutUs = () => {
       portfolio: "https://nikhilportfolio-mu.vercel.app/",
       github: "https://github.com/nikhil-rathour",
       linkedin: "https://www.linkedin.com/in/nikhil-rathour-8a56302a6",
-      email: "rathournikhil042@gmail.com"
+      email: "rathournikhil042@gmail.com",
+      url  : "https://media.licdn.com/dms/image/v2/D4D03AQFB0sR-JGhUFA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1726752362106?e=2147483647&v=beta&t=IllvoukZx1hPOdV7BCdRgK5NJHJI9XTbRXX4MDHB1_c"
+
     },
     {
       name: "YUG SINGH",
       portfolio: "https://yugsingh.vercel.app/ ",
       github: "https://github.com/Yugsingh05",
       linkedin: "https://www.linkedin.com/in/yug-singh-9a67342aa",
-      email: "yugsingh7622@gmail.com"
+      email: "yugsingh7622@gmail.com",
+      url  : "https://media.licdn.com/dms/image/v2/D4D03AQERZQOi70uOXg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1723363782157?e=2147483647&v=beta&t=naE0T4OVNpRBquIc50T13rdmG6vQEGS1SbR5qyJgrYM"
+
     },
     {
       name: "HEMANT KUMAR",
       portfolio: "#",
       github: "https://github.com/hemantfy",
       linkedin: "https://www.linkedin.com/in/realhemantkumar?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app ",
-      email: "ladhanihemant@gmail.com"
+      email: "ladhanihemant@gmail.com",
+      url  : "https://media.licdn.com/dms/image/v2/D4D03AQHbz77SoNZaUw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1724701887122?e=2147483647&v=beta&t=oEL7nY_7ZgEPd4grh1eQHdRKVtup1Y2V2E6GkHXkDXY"
     },
     {
       name: "PRATHVIRAJ SONI",
       portfolio: "https://bento.me/prathviraj-soni",
       github: "https://www.linkedin.com/in/nikhil-rathour-8a56302a6",
       linkedin: "https://www.linkedin.com/in/prathviraj-soni-30a61628b/",
-      email: "soniprathviraj07@gmail.com"
+      email: "soniprathviraj07@gmail.com",
+      url  : "https://media.licdn.com/dms/image/v2/D4D03AQGFVitrFpOilw/profile-displayphoto-shrink_200_200/B4DZOp_fpBHQAY-/0/1733723816169?e=2147483647&v=beta&t=--w0M5fNVh8yCSG5z-xxSADEh3N3vBvK0ZTHPHbNMeg"
+
     }
   ];
 
@@ -102,9 +109,12 @@ const AboutUs = () => {
             {developers.map((developer, index) => (
               <div key={index} className="bg-gradient-to-br from-[#F2AFEF] to-[#C499F3] bg-opacity-20 rounded-lg p-6 text-center hover:shadow-lg transition-shadow duration-300">
                 <div className="w-20 h-20 bg-gradient-to-br from-[#AD49E1] to-[#7360DF] rounded-full mx-auto mb-4 flex items-center justify-center">
-                  <span className="text-white font-bold text-xl">
+                  {/* <span className="text-white font-bold text-xl">
                     {developer.name.split(' ').map(n => n[0]).join('')}
-                  </span>
+                  </span> */}
+                  <img className=' w-20 h-20 rounded-full  mx-auto  shadow-lg '
+                  src={developer.url}
+                   alt="" />
                 </div>
                 <h3 className="font-bold text-[#e63579] text-lg mb-2">{developer.name}</h3>
                 <p className="text-gray-600 text-sm mb-4">{developer.role}</p>
