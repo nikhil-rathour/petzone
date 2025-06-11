@@ -2,6 +2,7 @@ import React, { memo, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import appwriteService from "../appwrite/config";
 import { useSelector } from "react-redux";
+import conf from "../conf/conf";
 
 function Post() {
   const [post, setPost] = useState(null);
@@ -39,7 +40,7 @@ function Post() {
             <div className="w-full md:w-1/2 p-6">
               <div className="relative overflow-hidden rounded-2xl shadow-lg">
                 <img
-                  src={appwriteService.getFilePreview(post.petImage)}
+                   src={`https://fra.cloud.appwrite.io/v1/storage/buckets/${conf.appwriteBucketId}/files/${post.petImage}/view?project=${conf.appwriteProjectId}&mode=admin`}
                   alt={post.breed}
                   className="w-full h-80 object-cover transform hover:scale-105 transition-transform duration-500"
                 />
@@ -109,7 +110,7 @@ function Post() {
               <div className="relative overflow-hidden rounded-2xl shadow-lg">
                 <div className="flex justify-center p-3">
                   <img
-                    src={appwriteService.getFilePreview(post.medicalImage)}
+                     src={`https://fra.cloud.appwrite.io/v1/storage/buckets/${conf.appwriteBucketId}/files/${post.medicalImage}/view?project=${conf.appwriteProjectId}&mode=admin`}
                     alt="Medical Document"
                     className="w-1/2 object-cover object-center transform hover:scale-105 transition-transform duration-500"
                   />
