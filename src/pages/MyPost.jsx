@@ -14,11 +14,10 @@ export default function MyPost() {
         const userPosts = [];
         for (var i = postsResponse.total - 1; i >= 0; i--) {
           if(postsResponse.documents[i].userId === userData.$id){
-            console.log(postsResponse.documents[i],userData.$id)
             const data = postsResponse.documents[i];
           userPosts.push(data);
           }
-          //   console.log(data.$createdAt.split("T",1))
+          
         }
         setPosts(userPosts);
       }

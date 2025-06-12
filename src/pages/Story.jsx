@@ -16,7 +16,6 @@ function Story() {
       const response = await service.getStories([Query.equal("status", "active")])
       if (response) {
         setStories(response.documents)
-        console.log(response.documents)
       }
     } catch (error) {
       console.error("Error fetching stories:", error)

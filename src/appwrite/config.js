@@ -10,7 +10,7 @@ export class Service {
     this.client
       .setEndpoint(conf.appwriteUrl)
       .setProject(conf.appwriteProjectId);
-      // console.log(conf.appwriteUrl, conf.appwriteProjectId, conf.appwriteBucketId , conf.appwritePetsCollectionId, conf.appwriteDatabaseId)
+    
     this.databases = new Databases(this.client);
     this.bucket = new Storage(this.client);
   }

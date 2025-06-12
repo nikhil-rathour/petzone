@@ -27,13 +27,11 @@ const Home = () => {
 
   useEffect(() => {
     service.getPosts([]).then((postsResponse) => {
-      console.log(postsResponse,'hi')
       if (postsResponse) {
         const userPosts = [];
         for (var i = postsResponse.total - 1; i >= 0; i--) {
           const data = postsResponse.documents[i];
           userPosts.push(data);
-          //   console.log(data.$createdAt.split("T",1))
         }
         setPosts(userPosts);
       }

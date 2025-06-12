@@ -12,7 +12,6 @@ function SellPet() {
 
   const navigate = useNavigate();
   const userData = useSelector((state) => state.auth.userData);
-  console.log(userData.$id)
 
   const petOptions = {
     Dog: ['Labrador', 'Pug', 'Beagle', 'German Shepherd', 'Shih Tzu', 'Rottweiler'],
@@ -69,7 +68,6 @@ function SellPet() {
 
   const submit = async (data) => {
     setIsLoading(true);
-    console.log("Form data:", data);
     try {
       // File upload logic
       let file1 = null;
@@ -78,7 +76,6 @@ function SellPet() {
       if (data.image1 && data.image1[0]) {
         try {
           file1 = await service.uploadFile(data.image1[0]);
-          console.log("Pet image uploaded successfully:", file1);
         } catch (error) {
           console.error("Error uploading pet image:", error);
           throw new Error("Failed to upload pet image");
@@ -88,14 +85,11 @@ function SellPet() {
       if (data.image2 && data.image2[0]) {
         try {
           file2 = await service.uploadFile(data.image2[0]);
-          console.log("Vaccination image uploaded successfully:", file2);
         } catch (error) {
           console.error("Error uploading vaccination image:", error);
           throw new Error("Failed to upload vaccination image");
         }
       }
-
-      console.log("Uploaded files:", { file1, file2 });
 
       const postData = {
         type: data.type,
@@ -114,35 +108,32 @@ function SellPet() {
         postDate: post ? post.postDate : new Date().toISOString(),
       };
 
-      console.log("Post data:", postData);
-
       let dbPost;
       if (post) {
         // Update existing post
         if (file1 && post.petImage) {
-          console.log("Deleting old pet image");
+     
           await service.deleteFile(post.petImage);
         }
         if (file2 && post.medicalImage) {
-          console.log("Deleting old vaccination image");
+        
           await service.deleteFile(post.medicalImage);
         }
 
-        console.log("Updating post");
+        
         dbPost = await service.updatePost(post.$id, postData);
       } else {
         // Create new post
-        console.log("Creating new post");
+        
         dbPost = await service.createPost({
           ...postData,
           slug: ID.unique(),
         });
       }
 
-      console.log("DB Post result:", dbPost);
-
+    
       if (dbPost) {
-        console.log("Navigating to post page");
+       
         navigate(`/post/${dbPost.$id}`);
       } else {
         throw new Error("Failed to create/update post");

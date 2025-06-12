@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from "react";
+import  { memo, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import appwriteService from "../appwrite/config";
 import { useSelector } from "react-redux";
@@ -6,7 +6,7 @@ import conf from "../conf/conf";
 
 function Post() {
   const [post, setPost] = useState(null);
-  console.log(post)
+
   const { slug } = useParams();
   const navigate = useNavigate();
 
