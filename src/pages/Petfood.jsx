@@ -175,7 +175,7 @@ const PetFood = () => {
                     <span className="text-lg font-semibold text-[#7360DF]">₹{food.price}</span>
                   </div>
                   <button className="w-full bg-[#7360DF] text-white py-2 px-4 rounded-md hover:bg-opacity-90 transition-colors duration-300">
-                    <Link to={food.Link}>Add to Cart </Link>
+                    <Link to={food.Link} target="_blank">Add to Cart </Link>
                     
                   </button>
                 </div>
