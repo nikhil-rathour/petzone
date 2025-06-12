@@ -15,8 +15,8 @@ const PetFood = () => {
       petType: "Dog",
       breed: "Labrador",
       description: "High-quality organic dog food for Labradors.",
-      price: "899",
-      Link : "https://www.pedigree.com/where-to-buy?mikmak-sku=023100116341"
+      price: "11,625.77",
+      Link : "https://www.getuscart.com/pedigree-complete-nutrition-adult-dry-dog-food-grilled-steak-vegetable-flavor-18-lb-bag?gad_source=1&gad_campaignid=20419017064&gbraid=0AAAAABn0HU5LNaBXr9Jb2GwBgGT3Ksmc4&gclid=Cj0KCQjw0qTCBhCmARIsAAj8C4Y5SdHeepJaFOMzQDO2CT4Ll4d-zP3myInwwptL75upzexpaQiQ_04aAmsaEALw_wcB"
     },
     {
       id: 4,
@@ -27,7 +27,7 @@ const PetFood = () => {
       breed: "Beagle",
       description: "High-quality organic dog food for Beagles.",
       price: "899",
-      Link : "https://www.pedigree.com/where-to-buy?mikmak-sku=023100149288"
+      Link : "https://www.pedigree.com/products/treats/pedigree-canine-cookouts-chicken-flavored-meaty-strips"
     },
     {
       id: 2,
@@ -36,7 +36,7 @@ const PetFood = () => {
       petType: "Cat",
       breed: "Siamese",
       description: "Grain-free cat food for Siamese cats.",
-      price: "999",
+      price: "919",
       Link : "https://www.petsy.online/products/purepet-dry-cat-food-tuna-and-salmon"
     },
     {
@@ -48,7 +48,7 @@ const PetFood = () => {
       breed: "Shih Tzu",
       description: "Special formula for Shih Tzu puppies.",
       price: "699",
-      Link : "https://www.pedigree.com/where-to-buy?mikmak-sku=023100140322"
+      Link : "https://www.pedigree.com/products/dental-treats/pedigree-dentastix-bacon-flavor-toysmall-dog-treats"
     },
     {
       id: 5,
@@ -58,17 +58,17 @@ const PetFood = () => {
       breed: "British Shorthair",
       description: "Grain-free cat food for British Shorthair cats.",
       price: "2184",
-      Link : "https://www.petsy.online/products/purepet-dry-cat-food-tuna-and-salmon"
+      Link : "https://www.justdogsstore.com/products/royal-canin-persian-adult-breed-specific-dry-cat-food/?attribute_pa_weight=4000-g&gad_source=1&gad_campaignid=22606070587&gbraid=0AAAAACuYIh5ISxwzg9cH0hRZKd4WUscs9&gclid=Cj0KCQjw0qTCBhCmARIsAAj8C4ZK1ZljVLaJbxS1VwdceWy_1-bRE84eFxhXC9ftrY9GSXwfuUKJOq8aAqoWEALw_wcB"
     },
     {
       id: 6,
-      photo:"https://www.petsy.online/cdn/shop/products/2_e9f2dd7b-7aa6-4daa-930d-c35d3db7a7fa_295x295.jpg?v=1667387570",
+      photo:"https://petsy.online/cdn/shop/files/OTRFO1451.jpg?v=1746080174&width=1200",
       name: "Whiskas Adult Wet Cat Food - Ocean Fish ",
       petType: "Cat",
       breed: "Himalayan",
       description: "Grain-free cat food for himalayan cats.",
       price: "1218",
-      Link : "https://www.petsy.online/products/whiskas-adult-1-year-wet-cat-food-ocean-fish-80g-x-24-pouches"
+      Link : "https://petsy.online/products/whiskas-kitten-2-12-months-tuna-in-jelly-wet-food-80-gm?variant=44914760220833&country=IN&currency=INR&utm_medium=product_sync&utm_source=google&utm_content=sag_organic&utm_campaign=sag_organic&utm_source=Google&utm_medium=google_paidpmax&utm_campaign=IC_Sales_Pmax_OtherCities_061124&gad_source=1&gad_campaignid=21886620712&gbraid=0AAAAACaYPWvPkXO0tJF80XMbGH_HMEX6O&gclid=Cj0KCQjw0qTCBhCmARIsAAj8C4akrppZDxbF25bLHp_ImpvJzO9ko-Lpt-zyTpTl86lX7if_Eyw9AW0aAlGoEALw_wcB"
     },
   ];
 
