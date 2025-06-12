@@ -9,6 +9,8 @@ import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import authService from './appwrite/auth'
 import { login,logout } from './store/authSlice'
+import { Analytics } from "@vercel/analytics/react"
+
 
 function App() {
 
@@ -40,6 +42,7 @@ function App() {
     <Header/>
     <Outlet/>
     <Footer/>
+    <Analytics/>
     </>
     ): null
   
