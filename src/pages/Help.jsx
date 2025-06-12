@@ -56,7 +56,7 @@ const Help = () => {
       location: 'Gandhinagar',
       contact: '09636901352',
       description: 'Non-profit organization.',
-      photo: 'https://thegodsgiftfoundation.com/wp-content/uploads/2022/01/IMG-20201218-WA0008.jpg',
+      photo: 'https://thegodsgiftfoundation.com/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-25-at-4.04.59-PM-3-1024x768.jpeg',
       mapLink: 'https://maps.app.goo.gl/2P7euCcPBewgT8dW8',
     },
     {
