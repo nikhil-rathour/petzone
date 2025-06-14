@@ -1,0 +1,202 @@
+"use client"
+
+import Image from "next/image";
+import React, { useState } from "react";
+import Link from "next/link";
+
+const PetFood = () => {
+  const [selectedPet, setSelectedPet] = useState("All");
+  const [selectedBreed, setSelectedBreed] = useState("All");
+
+  // Sample pet food data based on pet type and breed
+  const petFoodData = [
+    {
+      id: 1,
+      photo:
+        "https://www.pedigree.com/sites/g/files/fnmzdf3076/files/migrate-product-files/images/zetfvv404nb8otnhreya.png",
+      name: "PEDIGREE Dry Dog Food Adult Grilled Steak & Vegetable Flavor",
+      petType: "Dog",
+      breed: "Labrador",
+      description: "High-quality organic dog food for Labradors.",
+      price: "11,625.77",
+      Link : "https://www.getuscart.com/pedigree-complete-nutrition-adult-dry-dog-food-grilled-steak-vegetable-flavor-18-lb-bag?gad_source=1&gad_campaignid=20419017064&gbraid=0AAAAABn0HU5LNaBXr9Jb2GwBgGT3Ksmc4&gclid=Cj0KCQjw0qTCBhCmARIsAAj8C4Y5SdHeepJaFOMzQDO2CT4Ll4d-zP3myInwwptL75upzexpaQiQ_04aAmsaEALw_wcB"
+    },
+    {
+      id: 4,
+      photo:
+        "https://www.pedigree.com/sites/g/files/fnmzdf3076/files/migrate-product-files/images/uo3f3l4kosbckx0hx8hn.png",
+      name: "PEDIGREE CANINE COOKOUTS Chicken Flavored Meaty Strips",
+      petType: "Dog",
+      breed: "Beagle",
+      description: "High-quality organic dog food for Beagles.",
+      price: "899",
+      Link : "https://www.pedigree.com/products/treats/pedigree-canine-cookouts-chicken-flavored-meaty-strips"
+    },
+    {
+      id: 2,
+      photo:"https://www.petsy.online/cdn/shop/products/613hZE6fSqL._SL1500_295x295.jpg?v=1656925893",
+      name: "Purepet Dry Cat Food - Tuna and Salmon",
+      petType: "Cat",
+      breed: "Siamese",
+      description: "Grain-free cat food for Siamese cats.",
+      price: "919",
+      Link : "https://www.petsy.online/products/purepet-dry-cat-food-tuna-and-salmon"
+    },
+    {
+      id: 3,
+      photo:
+        "https://www.pedigree.com/sites/g/files/fnmzdf3076/files/migrate-product-files/images/xzdrpkhcshtzisb27cwq.png",
+      name: "PEDIGREE DENTASTIX Bacon Flavor Toy/Small Dog Treats",
+      petType: "Dog",
+      breed: "Shih Tzu",
+      description: "Special formula for Shih Tzu puppies.",
+      price: "699",
+      Link : "https://www.pedigree.com/products/dental-treats/pedigree-dentastix-bacon-flavor-toysmall-dog-treats"
+    },
+    {
+      id: 5,
+      photo:"https://www.petsy.online/cdn/shop/files/PersianAdult-10_295x295.png?v=1717584822",
+      name: "Royal Canin Persian Adult Breed Dry Cat Food",
+      petType: "Cat",
+      breed: "British Shorthair",
+      description: "Grain-free cat food for British Shorthair cats.",
+      price: "2184",
+      Link : "https://www.justdogsstore.com/products/royal-canin-persian-adult-breed-specific-dry-cat-food/?attribute_pa_weight=4000-g&gad_source=1&gad_campaignid=22606070587&gbraid=0AAAAACuYIh5ISxwzg9cH0hRZKd4WUscs9&gclid=Cj0KCQjw0qTCBhCmARIsAAj8C4ZK1ZljVLaJbxS1VwdceWy_1-bRE84eFxhXC9ftrY9GSXwfuUKJOq8aAqoWEALw_wcB"
+    },
+    {
+      id: 6,
+      photo:"https://petsy.online/cdn/shop/files/OTRFO1451.jpg?v=1746080174&width=1200",
+      name: "Whiskas Adult Wet Cat Food - Ocean Fish ",
+      petType: "Cat",
+      breed: "Himalayan",
+      description: "Grain-free cat food for himalayan cats.",
+      price: "1218",
+      Link : "https://petsy.online/products/whiskas-kitten-2-12-months-tuna-in-jelly-wet-food-80-gm?variant=44914760220833&country=IN&currency=INR&utm_medium=product_sync&utm_source=google&utm_content=sag_organic&utm_campaign=sag_organic&utm_source=Google&utm_medium=google_paidpmax&utm_campaign=IC_Sales_Pmax_OtherCities_061124&gad_source=1&gad_campaignid=21886620712&gbraid=0AAAAACaYPWvPkXO0tJF80XMbGH_HMEX6O&gclid=Cj0KCQjw0qTCBhCmARIsAAj8C4akrppZDxbF25bLHp_ImpvJzO9ko-Lpt-zyTpTl86lX7if_Eyw9AW0aAlGoEALw_wcB"
+    },
+  ];
+
+  // Pet breeds available based on selected pet type
+  const breedOptions = {
+    Dog: ["Labrador", "Golden Retriever"],
+    Cat: ["Siamese"],
+  };
+
+  // Filter pet food based on selected pet type and breed
+  const filteredPetFood = petFoodData.filter((food) => {
+    return (
+      (selectedPet === "All" || food.petType === selectedPet) &&
+      (selectedBreed === "All" || food.breed === selectedBreed)
+    );
+  });
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-[#AD49E1] to-[#EBD3F8]">
+      {/* Header */}
+      <div className="relative w-full overflow-hidden h-80 md:h-96 lg:h-[28rem]">
+        <Image
+          src="https://images.pexels.com/photos/230785/pexels-photo-230785.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+
+          alt="Pet Food Banner"
+          className="w-full h-full object-cover"
+          fill
+          priority
+        />
+        <div className="absolute inset-0 bg-black opacity-40 flex items-center justify-center">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white text-center px-4">
+          Satisfying Cravings, Supporting Health
+          </h1>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="container mx-auto px-6 py-12">
+        <h2 className="text-3xl font-bold mb-8 text-white text-center">
+          Find the Perfect Food for Your Pet
+        </h2>
+        
+        {/* Filters */}
+        <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Pet Type Filter */}
+            <div>
+              <label className="block text-gray-700 font-medium mb-2">Pet Type</label>
+              <select
+                value={selectedPet}
+                onChange={(e) => {
+                  setSelectedPet(e.target.value);
+                  setSelectedBreed("All");
+                }}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#7360DF]"
+              >
+                <option value="All">All Pets</option>
+                <option value="Dog">Dog</option>
+                <option value="Cat">Cat</option>
+              </select>
+            </div>
+
+            {/* Breed Filter */}
+            {selectedPet !== "All" && (
+              <div>
+                <label className="block text-gray-700 font-medium mb-2">Breed</label>
+                <select
+                  value={selectedBreed}
+                  onChange={(e) => setSelectedBreed(e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#7360DF]"
+                >
+                  <option value="All">All Breeds</option>
+                  {breedOptions[selectedPet as keyof typeof breedOptions]?.map((breed) => (
+                    <option key={breed} value={breed}>{breed}</option>
+                  ))}
+                </select>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Pet Food Cards */}
+        {filteredPetFood.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredPetFood.map((food) => (
+              <div
+                key={food.id}
+                className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1"
+              >
+                <Image
+                  src={food.photo}
+                  alt={food.name}
+                  className="w-full h-64 object-cover m-auto mt-4"
+                  height={100}
+                  width={100}
+                />
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold mb-4">{food.name}</h3>
+                  <p className="text-gray-600 mb-2">
+                    <span className="font-medium">Pet Type:</span> {food.petType}
+                  </p>
+                  <p className="text-gray-600 mb-2">
+                    <span className="font-medium">Breed:</span> {food.breed}
+                  </p>
+                  <p className="text-gray-600 mb-4">{food.description}</p>
+                  <div className="flex justify-between items-center mb-4">
+                    <span className="text-lg font-semibold text-[#7360DF]">₹{food.price}</span>
+                  </div>
+                  <button className="w-full bg-[#7360DF] text-white py-2 px-4 rounded-md hover:bg-opacity-90 transition-colors duration-300">
+                    <Link href={food.Link} target="_blank">Add to Cart </Link>
+                    
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-20 bg-white rounded-lg shadow-lg">
+            <h2 className="text-2xl font-semibold text-gray-800">No food options available</h2>
+            <p className="text-gray-600 mt-4">Try adjusting your search criteria.</p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default PetFood;

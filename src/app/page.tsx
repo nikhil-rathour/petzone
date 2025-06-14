@@ -1,103 +1,346 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import Link from "next/link";
 import Image from "next/image";
+import { Gender, Location, PetPost, PetType } from "@/types/home.types";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
+// Dummy data for pets
+const dummyPets: PetPost[] = [
+  {
+    id: 1,
+    type: "Dog" as PetType,
+    breed: "Labrador",
+    gender: "Male" as Gender,
+    age: 12,
+    location: "Ahmedabad",
+    price: 15000,
+    image:
+      "https://images.pexels.com/photos/2607544/pexels-photo-2607544.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    adopt: false,
+  },
+  {
+    id: 2,
+    type: "Cat" as PetType,
+    breed: "Persian",
+    gender: "Female" as Gender,
+    age: 8,
+    location: "Gandhinagar",
+    price: 12000,
+    image:
+      "https://images.pexels.com/photos/3299905/pexels-photo-3299905.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    adopt: false,
+  },
+  {
+    id: 3,
+    type: "Dog" as PetType,
+    breed: "German Shepherd",
+    gender: "Male" as Gender,
+    age: 16,
+    location: "Surat",
+    price: 20000,
+    image:
+      "https://images.pexels.com/photos/1629781/pexels-photo-1629781.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    adopt: false,
+  },
+];
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [selectedPet, setSelectedPet] = useState<PetType>('Dog');
+  const [selectedBreed, setSelectedBreed] = useState<string>('All');
+  const [selectedGender, setSelectedGender] = useState<Gender | 'All'>('All');
+  const [selectedLocation, setSelectedLocation] = useState<Location | 'All'>('All');
+  const [currentSlide, setCurrentSlide] = useState<number>(0);
+  const [posts, setPosts] = useState<PetPost[]>(dummyPets);
+  
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const carouselImages = [
+    "https://images.pexels.com/photos/2607544/pexels-photo-2607544.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    "https://images.pexels.com/photos/3299905/pexels-photo-3299905.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    "https://images.pexels.com/photos/1629781/pexels-photo-1629781.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+  ];
+
+  useEffect(() => {
+    const slideInterval = setInterval(() => {
+      setCurrentSlide((prevSlide) => (prevSlide + 1) % carouselImages.length);
+    }, 5000);
+
+    return () => clearInterval(slideInterval);
+  }, [carouselImages.length]);
+
+const handlePetChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  setSelectedPet(event.target.value as PetType);
+  setSelectedBreed('All');
+  setSelectedGender('All');
+  setSelectedLocation('All');
+};
+
+const handleBreedChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  setSelectedBreed(event.target.value);
+};
+
+const handleGenderChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  setSelectedGender(event.target.value as Gender | 'All');
+};
+
+const handleLocationChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  setSelectedLocation(event.target.value as Location | 'All');
+};
+
+  const petOptions = {
+    Dog: [
+      "Labrador",
+      "Pug",
+      "Beagle",
+      "German Shepherd",
+      "shih tzu",
+      "rottweiler",
+    ],
+    Cat: [
+      "Persian",
+      "Siamese",
+      "Indian Billi (Indigenous Cat)",
+      "Himalayan",
+      "Bengal",
+      "British Shorthair",
+    ],
+  };
+  const locationOptions = [
+    "Ahmedabad",
+    "Gandhinagar",
+    "Rajkot",
+    "Surat",
+    "Vadodara",
+  ];
+
+  const getBreeds = (type: PetType) => {
+    return petOptions[type] || [];
+  };
+
+  const breeds = getBreeds(selectedPet);
+
+  const filteredPosts = posts.filter((post) => {
+    const matchesPet = post.type === selectedPet;
+    const matchesBreed =
+      selectedBreed === "All" ||
+      post.breed.toLowerCase() === selectedBreed.toLowerCase();
+    const matchesGender =
+      selectedGender === "All" || post.gender === selectedGender;
+    const matchesLocation =
+      selectedLocation === "All" || post.location === selectedLocation as Location;
+    return matchesPet && matchesBreed && matchesGender && matchesLocation;
+  });
+
+  const goToPreviousSlide = () => {
+    setCurrentSlide(
+      (prevSlide) =>
+        (prevSlide - 1 + carouselImages.length) % carouselImages.length
+    );
+  };
+
+  const goToNextSlide = () => {
+    setCurrentSlide((prevSlide) => (prevSlide + 1) % carouselImages.length);
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-[#AD49E1] to-[#EBD3F8]">
+      {/* Carousel */}
+      <div className="relative w-full overflow-hidden h-80 md:h-96 lg:h-[28rem]">
+        <div
+          className="flex transition-transform duration-1000 ease-in-out h-full"
+          style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+        >
+          {carouselImages.map((image, index) => (
+            <div
+              key={index}
+              className="min-w-full flex-shrink-0 relative h-full"
+            >
+              <Image
+                src={image}
+                alt={`Slide ${index}`}
+                fill
+                className="object-cover"
+                priority
+              />
+              <div className="absolute inset-0 bg-black opacity-40 flex items-center justify-center">
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white text-center px-4">
+                  {index === 0 && "PetZone Where Every Tail Wags Happily"}
+                  {index === 1 && "Love, Care, and Joy for Every Pet"}
+                  {index === 2 && "Your Pet's Happiness is Our Priority"}
+                </h1>
+              </div>
+            </div>
+          ))}
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+
+        {/* Carousel navigation buttons */}
+        <button
+          onClick={goToPreviousSlide}
+          className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white bg-opacity-30  p-2 rounded-full hover:bg-opacity-50 transition-colors duration-300 z-10 cursor-pointer"
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          <span className="text-3xl text-black">
+            <ChevronLeft />
+          </span>
+        </button>
+        <button
+          onClick={goToNextSlide}
+          className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white bg-opacity-30 p-2 rounded-full hover:bg-opacity-50 transition-colors duration-300 z-10 cursor-pointer"
         >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          <span className="text-3xl text-black">
+            <ChevronRight />
+          </span>
+        </button>
+      </div>
+
+      {/* Filters */}
+      <div className="container mx-auto px-6 py-12">
+        <h2 className="text-3xl font-bold mb-8 text-white text-center">
+          Find Your Perfect Pet
+        </h2>
+        <div className="bg-white rounded-lg shadow-lg p-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            {/* Pet Type Filter */}
+            <div>
+              <label className="block text-gray-700 font-medium mb-2">
+                Pet Type
+              </label>
+              <select
+                value={selectedPet}
+                onChange={handlePetChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#7360DF]"
+              >
+                {Object.keys(petOptions).map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Breed Filter */}
+            <div>
+              <label className="block text-gray-700 font-medium mb-2">
+                Breed
+              </label>
+              <select
+                value={selectedBreed}
+                onChange={handleBreedChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#7360DF]"
+              >
+                <option value="All">All</option>
+                {breeds.map((breed) => (
+                  <option key={breed} value={breed.toLowerCase()}>
+                    {breed}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Gender Filter */}
+            <div>
+              <label className="block text-gray-700 font-medium mb-2">
+                Gender
+              </label>
+              <select
+                value={selectedGender}
+                onChange={handleGenderChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#7360DF]"
+              >
+                <option value="All">All</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </div>
+
+            {/* Location Filter */}
+            <div>
+              <label className="block text-gray-700 font-medium mb-2">
+                Location
+              </label>
+              <select
+                value={selectedLocation}
+                onChange={handleLocationChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#7360DF]"
+              >
+                <option value="All">All</option>
+                {locationOptions.map((location) => (
+                  <option key={location} value={location}>
+                    {location}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Posts */}
+      <div className="container mx-auto px-6 py-12">
+        <h2 className="text-3xl font-bold mb-8 text-white text-center">
+          Available Pets
+        </h2>
+        {filteredPosts.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredPosts.map(
+              (post) =>
+                !post.adopt && (
+                  <div
+                    key={post.id}
+                    className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1"
+                  >
+                    <Image
+                      width={500}
+                      height={500}
+                      src={post.image}
+                      alt={post.breed}
+                      className="w-full h-64 object-cover"
+                    />
+                    <div className="p-6">
+                      <h3 className="text-xl font-semibold mb-4">
+                        {post.breed}
+                      </h3>
+                      <p className="text-gray-600 mb-2">
+                        <span className="font-medium">Pet Type:</span>{" "}
+                        {post.type}
+                      </p>
+                      <p className="text-gray-600 mb-2">
+                        <span className="font-medium">Gender:</span>{" "}
+                        {post.gender}
+                      </p>
+                      <p className="text-gray-600 mb-2">
+                        <span className="font-medium">Age:</span> {post.age}{" "}
+                        weeks
+                      </p>
+                      <p className="text-gray-600 mb-2">
+                        <span className="font-medium">Location:</span>{" "}
+                        {post.location}
+                      </p>
+                      <p className="text-gray-600 mb-4">
+                        <span className="font-medium">Price:</span> ₹
+                        {post.price}
+                      </p>
+                      <Link href={`/post/${post.id}`}>
+                        <button className="w-full bg-[#7360DF] text-white py-2 px-4 rounded-md hover:bg-opacity-90 transition-colors duration-300">
+                          View Details
+                        </button>
+                      </Link>
+                    </div>
+                  </div>
+                )
+            )}
+          </div>
+        ) : (
+          <div className="text-center py-20 bg-white rounded-lg shadow-lg">
+            <h2 className="text-2xl font-semibold text-gray-800">
+              No pets found
+            </h2>
+            <p className="text-gray-600 mt-4">
+              Try adjusting your search criteria.
+            </p>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
