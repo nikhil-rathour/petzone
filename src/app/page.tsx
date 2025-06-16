@@ -52,6 +52,7 @@ export default function Home() {
   const [selectedGender, setSelectedGender] = useState<Gender | 'All'>('All');
   const [selectedLocation, setSelectedLocation] = useState<Location | 'All'>('All');
   const [currentSlide, setCurrentSlide] = useState<number>(0);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [posts, setPosts] = useState<PetPost[]>(dummyPets);
   
 

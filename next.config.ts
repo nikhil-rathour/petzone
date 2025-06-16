@@ -11,6 +11,9 @@ const nextConfig: NextConfig = {
       "www.pedigree.com",
       "www.petsy.online",
       "petsy.online",
+      "imgs.search.brave.com",
+      "as1.ftcdn.net",
+      "i.pinimg.com"
     ],
   },
 };
